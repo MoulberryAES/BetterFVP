@@ -1,7 +1,7 @@
 {
-  "example": {
+  "fvp": {
     "settings": {
-      "name": "ExampleAddon",
+      "name": "FreakyVille+",
       "enabled": {
         "name": "Enabled"
       }
