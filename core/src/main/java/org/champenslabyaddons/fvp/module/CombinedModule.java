@@ -42,4 +42,7 @@ public abstract class CombinedModule implements Module {
   protected abstract ArrayList<Command> moduleCommandsOverview();
 
   protected abstract ArrayList<Object> moduleListenersOverview();
+
+  @Override
+  public abstract boolean shouldRegisterAutomatically();
 }

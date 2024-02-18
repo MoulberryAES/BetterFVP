@@ -28,4 +28,7 @@ public abstract class ListenerModule implements Module {
   }
 
   protected abstract ArrayList<Object> moduleListenersOverview();
+
+  @Override
+  public abstract boolean shouldRegisterAutomatically();
 }

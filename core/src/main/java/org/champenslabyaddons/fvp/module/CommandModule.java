@@ -29,4 +29,7 @@ public abstract class CommandModule implements Module {
   }
 
   protected abstract ArrayList<Command> moduleCommandsOverview();
+
+  @Override
+  public abstract boolean shouldRegisterAutomatically();
 }
