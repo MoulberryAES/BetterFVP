@@ -14,14 +14,14 @@ public abstract class ListenerModule implements Module {
   }
 
   @Override
-  public void register() {
+  public final void register() {
     for (Object listener : this.moduleListeners) {
       this.eventBus.registerListener(listener);
     }
   }
 
   @Override
-  public void unregister() {
+  public final void unregister() {
     for (Object listener : this.moduleListeners) {
       this.eventBus.unregisterListener(listener);
     }

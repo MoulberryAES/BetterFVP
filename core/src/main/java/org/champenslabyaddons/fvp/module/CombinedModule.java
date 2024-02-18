@@ -20,7 +20,7 @@ public abstract class CombinedModule implements Module {
   }
 
   @Override
-  public void register() {
+  public final void register() {
     for (Command command : this.moduleCommands) {
       this.commandService.register(command);
     }
@@ -30,7 +30,7 @@ public abstract class CombinedModule implements Module {
   }
 
   @Override
-  public void unregister() {
+  public final void unregister() {
     for (Command command : this.moduleCommands) {
       this.commandService.unregister(command);
     }
