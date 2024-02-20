@@ -6,8 +6,6 @@ package org.champenslabyaddons.fvp.util;
  * Den indeholder også repræsentationer af servere, der ikke længere er tilgængelige.
  */
 public enum FreakyVilleServer {
-  // FOR LABY DEVS: The server names are all in Danish, as the server is Danish.
-  // There is no need to translate them, as the server is not International.
   PRISON("NPrison"),
   CREATIVE("Kreativ"),
   SKY_BLOCK("Skyblock"),
@@ -19,25 +17,25 @@ public enum FreakyVilleServer {
   /**
    * @deprecated Ekspeditionen er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
-  @Deprecated
+  @Deprecated(forRemoval = false)
   THE_EXPEDITION("Ekspeditionen"),
 
   /**
    * @deprecated Factions er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
-  @Deprecated
+  @Deprecated(forRemoval = false)
   FACTIONS("Factions"),
 
   /**
    * @deprecated OP-Prison er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
-  @Deprecated
+  @Deprecated(forRemoval = false)
   OP_PRISON("OP-Prison"),
 
   /**
    * @deprecated Rumrejsen er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
-  @Deprecated
+  @Deprecated(forRemoval = false)
   SPACE_JOURNEY("Rumrejsen"),
   ;
 
