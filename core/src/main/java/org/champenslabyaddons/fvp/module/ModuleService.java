@@ -1,12 +1,15 @@
 package org.champenslabyaddons.fvp.module;
 
+import net.labymod.api.util.logging.Logging;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModuleService {
+  private final Logging logger;
   private final List<Module> registeredModules;
 
-  public ModuleService() {
+  public ModuleService(Logging logger) {
+    this.logger = logger;
     this.registeredModules = new ArrayList<>();
   }
 
@@ -19,6 +22,7 @@ public class ModuleService {
   public void registerModule(Module module) {
     module.register();
     registeredModules.add(module);
+    logger.info("REGISTERED MODULE | " + module.getClass().getTypeName());
   }
 
   /**
@@ -42,6 +46,7 @@ public class ModuleService {
   public void unregisterModule(Module module) {
     module.unregister();
     registeredModules.remove(module);
+    logger.info("UNREGISTERED MODULE | " + module.getClass().getTypeName());
   }
 
   /**
