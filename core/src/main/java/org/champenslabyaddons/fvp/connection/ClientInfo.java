@@ -44,7 +44,7 @@ public class ClientInfo {
     this.lastServer = lastServer;
   }
 
-  public boolean isHasUpdatedToCurrentServer() {
+  public boolean isUpdatedToCurrentServer() {
     return hasUpdatedToCurrentServer;
   }
 
