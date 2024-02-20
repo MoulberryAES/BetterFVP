@@ -1,7 +1,15 @@
 package org.champenslabyaddons.fvp;
 
+import net.labymod.api.LabyAPI;
 import net.labymod.api.addon.LabyAddon;
+import net.labymod.api.client.chat.command.CommandService;
+import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import org.champenslabyaddons.fvp.connection.ClientInfo;
+import org.champenslabyaddons.fvp.listeners.internal.ScoreBoardListener;
+import org.champenslabyaddons.fvp.listeners.internal.ServerNavigationListener;
+import org.champenslabyaddons.fvp.module.ModuleService;
+import org.champenslabyaddons.fvp.module.general.RPCModule;
 
 @AddonMain
 public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
@@ -9,6 +17,18 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
   @Override
   protected void enable() {
     this.registerSettingCategory();
+    LabyAPI labyAPI = this.labyAPI();
+    ClientInfo clientInfo = new ClientInfo(labyAPI.minecraft().getClientPlayer());
+    EventBus eventBus = labyAPI.eventBus();
+    CommandService commandService = labyAPI.commandService();
+
+    this.registerListener(new ScoreBoardListener(clientInfo));
+    this.registerListener(new ServerNavigationListener(clientInfo));
+
+    ModuleService moduleService = new ModuleService(this.logger());
+    moduleService.registerModules(
+        new RPCModule(eventBus, clientInfo, labyAPI(), configuration().getDiscordSubSettings())
+    );
 
     this.logger().info("Enabled the Addon");
   }
