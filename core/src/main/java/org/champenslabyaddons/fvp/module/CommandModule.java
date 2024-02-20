@@ -7,11 +7,10 @@ import java.util.List;
 
 public abstract class CommandModule implements Module {
   private final CommandService commandService;
-  private final List<Command> moduleCommands;
+  protected List<Command> moduleCommands;
 
   public CommandModule(CommandService commandService) {
     this.commandService = commandService;
-    this.moduleCommands = moduleCommandsOverview();
   }
 
   @Override

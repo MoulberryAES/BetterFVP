@@ -5,6 +5,11 @@
       "enabled": {
         "name": "Enabled"
       }
+    },
+    "rpc": {
+      "in": "I %s",
+      "playing": "Spiller på %s",
+      "lastSeen": "Sidst set på %s"
     }
   }
 }
