@@ -6,11 +6,10 @@ import java.util.List;
 
 public abstract class ListenerModule implements Module {
   private final EventBus eventBus;
-  private final List<Object> moduleListeners;
+  protected List<Object> moduleListeners;
 
   public ListenerModule(EventBus eventBus) {
     this.eventBus = eventBus;
-    this.moduleListeners = moduleListenersOverview();
   }
 
   @Override

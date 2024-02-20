@@ -8,15 +8,13 @@ import java.util.List;
 
 public abstract class CombinedModule implements Module {
   private final CommandService commandService;
-  private final List<Command> moduleCommands;
+  protected List<Command> moduleCommands;
   private final EventBus eventBus;
-  private final List<Object> moduleListeners;
+  protected List<Object> moduleListeners;
 
   public CombinedModule(CommandService commandService, EventBus eventBus) {
     this.commandService = commandService;
-    this.moduleCommands = moduleCommandsOverview();
     this.eventBus = eventBus;
-    this.moduleListeners = moduleListenersOverview();
   }
 
   @Override
