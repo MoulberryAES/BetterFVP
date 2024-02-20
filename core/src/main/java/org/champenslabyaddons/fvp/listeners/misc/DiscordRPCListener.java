@@ -43,7 +43,8 @@ public class DiscordRPCListener {
 
     if (clientInfo.getCurrentServer() == FreakyVilleServer.HUB) {
       status = I18n.translate("fvp.rpc.in", FreakyVilleServer.HUB.getServerName());
-      if (clientInfo.getLastServer() != FreakyVilleServer.NONE) {
+      if (clientInfo.getLastServer() != FreakyVilleServer.NONE
+          && clientInfo.getLastServer() != FreakyVilleServer.HUB) {
         extraDetails = I18n.translate("fvp.rpc.lastSeen",
             clientInfo.getLastServer().getServerName());
       }
@@ -58,7 +59,7 @@ public class DiscordRPCListener {
       acBuilder.details(extraDetails);
     }
     acBuilder.largeAsset(getServerAsset(clientInfo.getCurrentServer()));
-    acBuilder.smallAsset(getPlayerAsset());
+    //acBuilder.smallAsset(getPlayerAsset());
 
     this.labyAPI.thirdPartyService().discord().displayActivity(acBuilder.build());
 
