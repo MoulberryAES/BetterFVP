@@ -10,6 +10,7 @@ import org.champenslabyaddons.fvp.listeners.internal.ScoreBoardListener;
 import org.champenslabyaddons.fvp.listeners.internal.ServerNavigationListener;
 import org.champenslabyaddons.fvp.module.ModuleService;
 import org.champenslabyaddons.fvp.module.general.RPCModule;
+import org.champenslabyaddons.fvp.util.Messaging;
 
 @AddonMain
 public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
@@ -21,6 +22,8 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     ClientInfo clientInfo = new ClientInfo(labyAPI.minecraft().getClientPlayer());
     EventBus eventBus = labyAPI.eventBus();
     CommandService commandService = labyAPI.commandService();
+
+    Messaging.setExecutor(labyAPI.minecraft().chatExecutor());
 
     this.registerListener(new ScoreBoardListener(clientInfo));
     this.registerListener(new ServerNavigationListener(clientInfo));
