@@ -3,7 +3,6 @@ package org.champenslabyaddons.fvp.listeners.internal;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
-import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.scoreboard.ScoreboardObjectiveUpdateEvent;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
