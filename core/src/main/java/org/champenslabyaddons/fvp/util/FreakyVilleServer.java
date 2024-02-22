@@ -1,17 +1,21 @@
 package org.champenslabyaddons.fvp.util;
 
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.TranslatableComponent;
+import net.labymod.api.util.I18n;
+
 /**
  * Enum for at repræsentere de forskellige FreakyVille servere.
  * Vi bruger denne til at identificere hvilken server klienten er på.
  * Den indeholder også repræsentationer af servere, der ikke længere er tilgængelige.
  */
 public enum FreakyVilleServer {
-  PRISON("NPrison"),
-  CREATIVE("Kreativ"),
-  SKY_BLOCK("Skyblock"),
-  THE_CITY("Friheden"),
-  KIT_PVP("KitPvP"),
-  HUB("Hubben"),
+  PRISON("fvp.server.prison.name"),
+  CREATIVE("fvp.server.creative.name"),
+  SKY_BLOCK("fvp.server.skyBlock.name"),
+  THE_CITY("fvp.server.city.name"),
+  KIT_PVP("fvp.server.kitpvp.name"),
+  HUB("fvp.server.hub.name"),
   NONE(""),
 
   /**
@@ -39,14 +43,22 @@ public enum FreakyVilleServer {
   SPACE_JOURNEY("Rumrejsen"),
   ;
 
-  private final String serverName;
+  private final String nameKey;
 
-  FreakyVilleServer(String serverName) {
-      this.serverName = serverName;
+  FreakyVilleServer(String nameKey) {
+      this.nameKey = nameKey;
   }
 
-  public String getServerName() {
-      return serverName;
+  public String getNameKey() {
+      return nameKey;
+  }
+
+  public String getTranslatedName() {
+      return I18n.getTranslation(nameKey);
+  }
+
+  public TranslatableComponent getTranslatedComponent() {
+      return Component.translatable(nameKey);
   }
 
   public static FreakyVilleServer fromString(String scoreBoardTitle) {

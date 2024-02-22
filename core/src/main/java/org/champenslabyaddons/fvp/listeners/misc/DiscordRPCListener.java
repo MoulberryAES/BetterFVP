@@ -42,15 +42,15 @@ public class DiscordRPCListener {
     }
 
     if (clientInfo.getCurrentServer() == FreakyVilleServer.HUB) {
-      status = I18n.translate("fvp.rpc.in", FreakyVilleServer.HUB.getServerName());
+      status = I18n.translate("fvp.rpc.in", FreakyVilleServer.HUB.getNameKey());
       if (clientInfo.getLastServer() != FreakyVilleServer.NONE
           && clientInfo.getLastServer() != FreakyVilleServer.HUB) {
         extraDetails = I18n.translate("fvp.rpc.lastSeen",
-            clientInfo.getLastServer().getServerName());
+            clientInfo.getLastServer().getTranslatedName());
       }
     } else if (clientInfo.getCurrentServer() != FreakyVilleServer.NONE
         && clientInfo.getCurrentServer() != null) {
-      status = I18n.translate("fvp.rpc.playing", clientInfo.getCurrentServer().getServerName());
+      status = I18n.translate("fvp.rpc.playing", clientInfo.getCurrentServer().getTranslatedName());
     } else {
       status = I18n.translate("fvp.rpc.playing", "FreakyVille");
     }
@@ -72,23 +72,23 @@ public class DiscordRPCListener {
   }
 
   private Asset getServerAsset(FreakyVilleServer game) {
-    String freakyVille = "Freakyville - ";
+    String freakyVille = "Freakyville";
     return switch (game) {
       case SKY_BLOCK -> Asset.of(
           "https://imgur.com/g3KaKYM.png",
-          freakyVille + game.getServerName());
+          freakyVille + " - " + game.getTranslatedName());
       case PRISON -> Asset.of(
           "https://imgur.com/ubmcddH.png",
-          freakyVille + game.getServerName());
+          freakyVille + " - " + game.getTranslatedName());
       case KIT_PVP -> Asset.of(
           "https://imgur.com/WtVkxLX.png",
-          freakyVille + game.getServerName());
+          freakyVille + " - " + game.getTranslatedName());
       case THE_CITY -> Asset.of(
           "https://imgur.com/px58nWq.png",
-          freakyVille + game.getServerName());
+          freakyVille + " - " + game.getTranslatedName());
       case CREATIVE -> Asset.of(
           "https://imgur.com/3yEnk1T.png",
-          freakyVille + game.getServerName());
+          freakyVille + " - " + game.getTranslatedName());
       default -> Asset.of(
           "https://i.imgur.com/gCRkhmm.png",
           freakyVille);
