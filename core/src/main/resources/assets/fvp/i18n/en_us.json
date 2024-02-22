@@ -6,6 +6,29 @@
         "name": "Enabled"
       }
     },
+    "server": {
+      "prison": {
+        "name": "NPrison",
+        "cell": {
+          "location": "Lokation: %s"
+        }
+      },
+      "city": {
+        "name": "Friheden"
+      },
+      "kitpvp": {
+        "name": "KitPvP"
+      },
+      "skyBlock": {
+        "name": "SkyBlock"
+      },
+      "creative": {
+        "name": "Kreativ"
+      },
+      "hub": {
+        "name": "Hubben"
+      }
+    },
     "rpc": {
       "in": "I %s",
       "playing": "Spiller på %s",
