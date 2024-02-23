@@ -2,7 +2,7 @@ package org.champenslabyaddons.fvp.util;
 
 import net.labymod.api.client.chat.ChatExecutor;
 
-public class Messaging {
+public final class Messaging {
   private static ChatExecutor executor;
   private static boolean isSet;
 
