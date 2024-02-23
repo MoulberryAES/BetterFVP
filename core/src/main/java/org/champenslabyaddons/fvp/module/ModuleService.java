@@ -2,6 +2,7 @@ package org.champenslabyaddons.fvp.module;
 
 import net.labymod.api.util.logging.Logging;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ModuleService {
@@ -22,7 +23,11 @@ public class ModuleService {
   public void registerModule(Module module) {
     module.register();
     registeredModules.add(module);
-    logger.info("REGISTERED MODULE | " + module.getClass().getTypeName());
+    String registrationMessage = "REGISTERED MODULE | " + module.getClass().getTypeName();
+    if (module instanceof BigModule) {
+      registrationMessage += (" " + Arrays.toString(((BigModule) module).internalModulesOverview().toArray(new Module[0])));
+    }
+    logger.info(registrationMessage);
   }
 
   /**
