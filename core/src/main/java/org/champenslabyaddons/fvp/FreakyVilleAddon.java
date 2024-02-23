@@ -6,11 +6,14 @@ import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
+import org.champenslabyaddons.fvp.internal.CellList;
 import org.champenslabyaddons.fvp.listeners.internal.ScoreBoardListener;
 import org.champenslabyaddons.fvp.listeners.internal.ServerNavigationListener;
 import org.champenslabyaddons.fvp.module.ModuleService;
 import org.champenslabyaddons.fvp.module.general.RPCModule;
+import org.champenslabyaddons.fvp.module.nprison.NPrisonModule;
 import org.champenslabyaddons.fvp.util.Messaging;
+import java.io.IOException;
 
 @AddonMain
 public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
@@ -22,7 +25,12 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     ClientInfo clientInfo = new ClientInfo(labyAPI.minecraft().getClientPlayer());
     EventBus eventBus = labyAPI.eventBus();
     CommandService commandService = labyAPI.commandService();
-
+    CellList cellList = new CellList();
+    try {
+      cellList.init();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     Messaging.setExecutor(labyAPI.minecraft().chatExecutor());
 
     this.registerListener(new ScoreBoardListener(clientInfo));
@@ -30,7 +38,8 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
 
     ModuleService moduleService = new ModuleService(this.logger());
     moduleService.registerModules(
-        new RPCModule(eventBus, clientInfo, labyAPI(), configuration().getDiscordSubSettings())
+        new RPCModule(eventBus, clientInfo, labyAPI(), configuration().getDiscordSubSettings()),
+        new NPrisonModule(moduleService, commandService, eventBus, clientInfo)
     );
 
     this.logger().info("Enabled the Addon");
