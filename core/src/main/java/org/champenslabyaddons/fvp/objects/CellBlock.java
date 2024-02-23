@@ -45,7 +45,7 @@ public class CellBlock {
   }
 
   private boolean isInsideRange(int id) {
-    return id >= this.smallestId || id <= this.biggestId;
+    return id >= this.smallestId && id <= this.biggestId;
   }
 
   private boolean isNumeric(char c) {
