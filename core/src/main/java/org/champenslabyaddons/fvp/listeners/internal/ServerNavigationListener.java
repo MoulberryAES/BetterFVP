@@ -43,6 +43,7 @@ public class ServerNavigationListener {
     if (!this.clientInfo.isOnFreakyVille()) {
       return;
     }
+    this.clientInfo.setLastServer(this.clientInfo.getCurrentServer());
     this.clientInfo.setHasUpdatedToCurrentServer(false);
   }
 

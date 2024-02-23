@@ -34,29 +34,29 @@ public class DiscordRPCListener {
     DiscordActivity currentActivity = this.labyAPI.thirdPartyService().discord()
         .getDisplayedActivity();
     Builder acBuilder = DiscordActivity.builder(this);
-    String status;
-    String extraDetails = "";
+    String description;
+    String state = "";
 
     if (currentActivity != null) {
       acBuilder.start(currentActivity.getStartTime());
     }
 
     if (clientInfo.getCurrentServer() == FreakyVilleServer.HUB) {
-      status = I18n.translate("fvp.rpc.in", FreakyVilleServer.HUB.getNameKey());
+      description = I18n.translate("fvp.rpc.in", FreakyVilleServer.HUB.getTranslatedName());
       if (clientInfo.getLastServer() != FreakyVilleServer.NONE
           && clientInfo.getLastServer() != FreakyVilleServer.HUB) {
-        extraDetails = I18n.translate("fvp.rpc.lastSeen",
+        state = I18n.translate("fvp.rpc.lastSeen",
             clientInfo.getLastServer().getTranslatedName());
       }
     } else if (clientInfo.getCurrentServer() != FreakyVilleServer.NONE
         && clientInfo.getCurrentServer() != null) {
-      status = I18n.translate("fvp.rpc.playing", clientInfo.getCurrentServer().getTranslatedName());
+      description = I18n.translate("fvp.rpc.playing", clientInfo.getCurrentServer().getTranslatedName());
     } else {
-      status = I18n.translate("fvp.rpc.playing", "FreakyVille");
+      description = I18n.translate("fvp.rpc.playing", "FreakyVille");
     }
-    acBuilder.state(status);
-    if (!extraDetails.isEmpty()) {
-      acBuilder.details(extraDetails);
+    acBuilder.state(description);
+    if (!state.isEmpty()) {
+      acBuilder.details(state);
     }
     acBuilder.largeAsset(getServerAsset(clientInfo.getCurrentServer()));
     //acBuilder.smallAsset(getPlayerAsset());
