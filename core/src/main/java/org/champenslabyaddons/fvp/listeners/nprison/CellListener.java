@@ -2,6 +2,8 @@ package org.champenslabyaddons.fvp.listeners.nprison;
 
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
+import net.labymod.api.client.component.event.HoverEvent;
+import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
 import net.labymod.api.util.Pair;
@@ -30,9 +32,14 @@ public final class CellListener extends HousingListener {
         && this.clientInfo.getCurrentServer() == FreakyVilleServer.PRISON) {
       return;
     }
+    if (event.message().toBuilder().hasHoverEvent()) {
+      return;
+    }
     String plainMessage = event.chatMessage().getPlainText().trim();
     if (plainMessage.startsWith(Objects.requireNonNull(headerDecoration().getFirst())) &&
         plainMessage.endsWith(Objects.requireNonNull(headerDecoration().getSecond()))) {
+      event.setCancelled(true);
+      Messaging.executor().displayClientMessage(markComponent(event.message()));
       Messaging.executor().displayClientMessage(objectLocation(plainMessage));
     }
   }
@@ -50,10 +57,17 @@ public final class CellListener extends HousingListener {
       } else {
         return Component.empty();
       }
-      TextComponent cellComponent = Component.text(cellBlock.getLocationDescription());
-      return Component.translatable("fvp.server.prison.cell.location", cellComponent);
+      TextComponent cellComponent = Component.text(cellBlock.getLocationDescription(), NamedTextColor.GRAY);
+      return Component.translatable("fvp.server.prison.cell.location", NamedTextColor.AQUA, cellComponent);
     }
     return Component.empty();
+  }
+
+  @Override
+  protected Component markComponent(Component component) {
+    return component.hoverEvent(HoverEvent.showText(
+        Component.text("Ω", NamedTextColor.GOLD)
+    ));
   }
 
   protected Pair<String, String> headerDecoration() {

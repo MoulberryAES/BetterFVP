@@ -10,5 +10,7 @@ public abstract class HousingListener {
 
   protected abstract Component objectLocation(String header);
 
+  protected abstract Component markComponent(Component component);
+
   protected abstract Pair<String, String> headerDecoration();
 }
