@@ -10,7 +10,14 @@ public class DiscordSubConfiguration extends Config {
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
+  @SwitchSetting
+  private final ConfigProperty<Boolean> showCurrentServer = new ConfigProperty<>(true);
+
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
+  }
+
+  public ConfigProperty<Boolean> getShowCurrentServer() {
+    return this.showCurrentServer;
   }
 }

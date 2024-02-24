@@ -24,7 +24,7 @@ public class RPCModule extends ListenerModule {
   @Override
   protected ArrayList<Object> moduleListenersOverview() {
     ArrayList<Object> listeners = new ArrayList<>();
-    listeners.add(new DiscordRPCListener(clientInfo, labyAPI));
+    listeners.add(new DiscordRPCListener(clientInfo, labyAPI, configuration));
     return listeners;
   }
 

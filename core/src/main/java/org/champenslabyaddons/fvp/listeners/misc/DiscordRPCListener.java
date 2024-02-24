@@ -6,6 +6,7 @@ import net.labymod.api.thirdparty.discord.DiscordActivity;
 import net.labymod.api.thirdparty.discord.DiscordActivity.Asset;
 import net.labymod.api.thirdparty.discord.DiscordActivity.Builder;
 import net.labymod.api.util.I18n;
+import org.champenslabyaddons.fvp.configuration.DiscordSubConfiguration;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
 import org.champenslabyaddons.fvp.event.DiscordRPCEvent;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
@@ -14,11 +15,13 @@ public class DiscordRPCListener {
 
   private final LabyAPI labyAPI;
   private final ClientInfo clientInfo;
+  private final DiscordSubConfiguration configuration;
   private boolean currentlyRunning;
 
-  public DiscordRPCListener(ClientInfo clientInfo, LabyAPI labyAPI) {
+  public DiscordRPCListener(ClientInfo clientInfo, LabyAPI labyAPI, DiscordSubConfiguration configuration) {
     this.clientInfo = clientInfo;
     this.labyAPI = labyAPI;
+    this.configuration = configuration;
     this.currentlyRunning = false;
   }
 
@@ -39,6 +42,15 @@ public class DiscordRPCListener {
 
     if (currentActivity != null) {
       acBuilder.start(currentActivity.getStartTime());
+    }
+
+    if (!configuration.getShowCurrentServer().get()) {
+      description = I18n.translate("fvp.rpc.playing", "FreakyVille");
+      acBuilder.details(description);
+      acBuilder.largeAsset(getServerAsset(FreakyVilleServer.HUB));
+      labyAPI.thirdPartyService().discord().displayActivity(acBuilder.build());
+      currentlyRunning = false;
+      return;
     }
 
     if (clientInfo.getCurrentServer() == FreakyVilleServer.HUB) {
