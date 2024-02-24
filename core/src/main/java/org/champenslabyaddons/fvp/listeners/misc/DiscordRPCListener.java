@@ -54,9 +54,9 @@ public class DiscordRPCListener {
     } else {
       description = I18n.translate("fvp.rpc.playing", "FreakyVille");
     }
-    acBuilder.state(description);
+    acBuilder.details(description);
     if (!state.isEmpty()) {
-      acBuilder.details(state);
+      acBuilder.state(state);
     }
     acBuilder.largeAsset(getServerAsset(clientInfo.getCurrentServer()));
     //acBuilder.smallAsset(getPlayerAsset());
