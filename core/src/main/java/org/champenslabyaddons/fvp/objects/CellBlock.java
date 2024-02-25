@@ -1,16 +1,20 @@
 package org.champenslabyaddons.fvp.objects;
 
+import org.champenslabyaddons.fvp.util.Location;
+
 public class CellBlock {
   private final String cellType;
   private final int smallestId;
   private final int biggestId;
   private final String locationDescription;
+  private final Location minecraftLocation;
 
-  public CellBlock(String cellType, int smallestId, int biggestId, String locationDescription) {
+  public CellBlock(String cellType, int smallestId, int biggestId, String locationDescription, Location minecraftLocation) {
     this.cellType = cellType.toLowerCase();
     this.smallestId = smallestId;
     this.biggestId = biggestId;
     this.locationDescription = locationDescription;
+    this.minecraftLocation = minecraftLocation;
   }
 
   public String getCellType() {
@@ -27,6 +31,10 @@ public class CellBlock {
 
   public String getLocationDescription() {
     return locationDescription;
+  }
+
+  public Location getMinecraftLocation() {
+    return minecraftLocation;
   }
 
   public boolean isCellPartOfCellBlock(String typeAndId) {

@@ -1,6 +1,7 @@
 package org.champenslabyaddons.fvp.internal;
 
 import org.champenslabyaddons.fvp.objects.CellBlock;
+import org.champenslabyaddons.fvp.util.Location;
 import org.champenslabyaddons.fvp.util.csv.Csv;
 import org.champenslabyaddons.fvp.util.http.HttpConnector;
 import org.champenslabyaddons.fvp.util.resource.Resources;
@@ -30,7 +31,13 @@ public class CellList implements Manager {
     Csv csv = new Csv(new BufferedReader(new InputStreamReader(connection.getInputStream())));
 
     for (String[] strings : csv.readALl()) {
-      this.cellBlocks.add(new CellBlock(strings[0], Integer.parseInt(strings[1]), Integer.parseInt(strings[2]), strings[3]));
+      this.cellBlocks.add(new CellBlock(
+          strings[0],
+          Integer.parseInt(strings[1]),
+          Integer.parseInt(strings[2]),
+          strings[3],
+          new Location(strings[4], strings[5], strings[6])
+      ));
     }
 
     connection.disconnect();
