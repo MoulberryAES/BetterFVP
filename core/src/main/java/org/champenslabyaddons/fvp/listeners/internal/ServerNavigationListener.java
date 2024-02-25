@@ -6,6 +6,8 @@ import net.labymod.api.event.client.network.server.ServerDisconnectEvent;
 import net.labymod.api.event.client.network.server.ServerJoinEvent;
 import net.labymod.api.event.client.network.server.SubServerSwitchEvent;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
+import org.champenslabyaddons.fvp.event.RequestEvent;
+import org.champenslabyaddons.fvp.event.RequestEvent.RequestType;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
 
 public class ServerNavigationListener {
@@ -45,6 +47,7 @@ public class ServerNavigationListener {
     }
     this.clientInfo.setLastServer(this.clientInfo.getCurrentServer());
     this.clientInfo.setHasUpdatedToCurrentServer(false);
+    Laby.fireEvent(new RequestEvent(RequestType.REMOVE_WAYPOINTS));
   }
 
   private boolean isValidServerAddress(String address) {
