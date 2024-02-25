@@ -22,6 +22,7 @@ public class RequestEvent implements Event {
    * men som ikke har nogen parametre og derfor er unødvendige at lave en ny klasse til.
    */
   public enum RequestType {
-    DISCORD_RPC
+    DISCORD_RPC,
+    REMOVE_WAYPOINTS
   }
 }
