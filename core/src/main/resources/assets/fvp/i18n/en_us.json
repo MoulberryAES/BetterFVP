@@ -10,7 +10,16 @@
       "prison": {
         "name": "NPrison",
         "cell": {
-          "location": "Lokation: %s"
+          "location": "Lokation: %s",
+          "commands": {
+            "waypoint": {
+              "description": "%s Opret et midlertidigt waypoint til den angivne celle",
+              "notListed": "Cellen er kunne ikke findes",
+              "emptyResult": "Cellen kunne ikke bindes til en lokation",
+              "disabled": "Du skal have aktiveret / installeret Laby's Waypoints for at bruge denne funktion",
+              "success": "Waypoint oprettet"
+            }
+          }
         }
       },
       "city": {

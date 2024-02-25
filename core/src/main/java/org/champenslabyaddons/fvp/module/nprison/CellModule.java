@@ -4,6 +4,7 @@ import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.util.logging.Logging;
+import org.champenslabyaddons.fvp.commands.CellWaypointCommand;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
 import org.champenslabyaddons.fvp.internal.CellList;
 import org.champenslabyaddons.fvp.listeners.nprison.CellListener;
@@ -31,7 +32,7 @@ public class CellModule extends CombinedModule {
   @Override
   protected ArrayList<Command> moduleCommandsOverview() {
     ArrayList<Command> commands = new ArrayList<>();
-
+    commands.add(new CellWaypointCommand(cellList));
     return commands;
   }
 

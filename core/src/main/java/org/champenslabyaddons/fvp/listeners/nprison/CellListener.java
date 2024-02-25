@@ -41,7 +41,18 @@ public final class CellListener extends HousingListener {
       event.setCancelled(true);
       Messaging.executor().displayClientMessage(markComponent(event.message()));
       Messaging.executor().displayClientMessage(objectLocation(plainMessage));
+    } else if (plainMessage.equals("[/ce find <spiller>] Se hvem spilleren har add hos")) {
+      event.setCancelled(true);
+      Messaging.executor().displayClientMessage(markComponent(event.message()));
+      Messaging.executor().displayClientMessage(waypointHelp());
     }
+  }
+
+  private Component waypointHelp() {
+    TextComponent syntax = Component.text("[", NamedTextColor.DARK_GRAY)
+        .append(Component.text("/ce waypoint <celleID>", NamedTextColor.RED))
+        .append(Component.text("]", NamedTextColor.DARK_GRAY));
+    return Component.translatable("fvp.server.prison.cell.commands.waypoint.description", NamedTextColor.WHITE, syntax);
   }
 
   @Override
@@ -50,6 +61,9 @@ public final class CellListener extends HousingListener {
         .replace(Objects.requireNonNull(headerDecoration().getFirst()), "")
         .replace(Objects.requireNonNull(headerDecoration().getSecond()), "")
         .trim();
+    if (restProduct.isEmpty() || restProduct.equals("Celle Kommandoer")) {
+      return Component.empty();
+    }
     if (cellList.isCellListed(restProduct)) {
       CellBlock cellBlock;
       if (cellList.getCorrespondingCellBlock(restProduct).isPresent()) {
