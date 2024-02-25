@@ -6,7 +6,8 @@ import net.labymod.api.client.component.TextComponent;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.scoreboard.ScoreboardObjectiveUpdateEvent;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
-import org.champenslabyaddons.fvp.event.DiscordRPCEvent;
+import org.champenslabyaddons.fvp.event.RequestEvent;
+import org.champenslabyaddons.fvp.event.RequestEvent.RequestType;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
 
 public class ScoreBoardListener {
@@ -34,7 +35,7 @@ public class ScoreBoardListener {
     if (titleText.matches("[a-zA-Z ]*") && !titleText.isEmpty()) {
       this.clientInfo.setCurrentServer(FreakyVilleServer.fromString(titleText.trim()));
       this.clientInfo.setHasUpdatedToCurrentServer(true);
-      Laby.fireEvent(new DiscordRPCEvent());
+      Laby.fireEvent(new RequestEvent(RequestType.DISCORD_RPC));
     } else {
       for (Component child : title.getChildren()) {
         String text = ((TextComponent) child).getText();
@@ -45,7 +46,7 @@ public class ScoreBoardListener {
         if (text.matches("[a-zA-Z ]+")) {
           this.clientInfo.setCurrentServer(FreakyVilleServer.fromString(text.trim()));
           this.clientInfo.setHasUpdatedToCurrentServer(true);
-          Laby.fireEvent(new DiscordRPCEvent());
+          Laby.fireEvent(new RequestEvent(RequestType.DISCORD_RPC));
           break;
         }
       }

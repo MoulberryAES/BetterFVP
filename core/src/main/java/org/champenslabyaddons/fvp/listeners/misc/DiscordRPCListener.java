@@ -8,7 +8,8 @@ import net.labymod.api.thirdparty.discord.DiscordActivity.Builder;
 import net.labymod.api.util.I18n;
 import org.champenslabyaddons.fvp.configuration.DiscordSubConfiguration;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
-import org.champenslabyaddons.fvp.event.DiscordRPCEvent;
+import org.champenslabyaddons.fvp.event.RequestEvent;
+import org.champenslabyaddons.fvp.event.RequestEvent.RequestType;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
 
 public class DiscordRPCListener {
@@ -79,7 +80,10 @@ public class DiscordRPCListener {
   }
 
   @Subscribe
-  public void onDiscordRPC(DiscordRPCEvent event) {
+  public void onDiscordRPC(RequestEvent event) {
+    if (event.getRequestType() != RequestType.DISCORD_RPC) {
+      return;
+    }
     updateRichPresence();
   }
 
