@@ -1,19 +1,19 @@
 package org.champenslabyaddons.fvp;
 
+import net.labymod.api.Laby;
 import net.labymod.api.LabyAPI;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
-import org.champenslabyaddons.fvp.internal.CellList;
+import org.champenslabyaddons.fvp.integrations.WaypointsIntegration;
 import org.champenslabyaddons.fvp.listeners.internal.ScoreBoardListener;
 import org.champenslabyaddons.fvp.listeners.internal.ServerNavigationListener;
 import org.champenslabyaddons.fvp.module.ModuleService;
 import org.champenslabyaddons.fvp.module.general.RPCModule;
 import org.champenslabyaddons.fvp.module.nprison.NPrisonModule;
 import org.champenslabyaddons.fvp.util.Messaging;
-import java.io.IOException;
 
 @AddonMain
 public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
@@ -25,14 +25,10 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     ClientInfo clientInfo = new ClientInfo(labyAPI.minecraft().getClientPlayer());
     EventBus eventBus = labyAPI.eventBus();
     CommandService commandService = labyAPI.commandService();
-    CellList cellList = new CellList();
-    try {
-      cellList.init();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
     Messaging.setExecutor(labyAPI.minecraft().chatExecutor());
 
+    Laby.references().addonIntegrationService()
+        .registerIntegration("labyswaypoints", WaypointsIntegration.class);
     this.registerListener(new ScoreBoardListener(clientInfo));
     this.registerListener(new ServerNavigationListener(clientInfo));
 
