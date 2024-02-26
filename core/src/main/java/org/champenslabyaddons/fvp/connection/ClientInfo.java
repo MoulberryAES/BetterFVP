@@ -2,17 +2,21 @@ package org.champenslabyaddons.fvp.connection;
 
 import net.labymod.api.client.entity.player.ClientPlayer;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
+import org.champenslabyaddons.fvp.util.Prison;
+import java.util.Optional;
 
 public class ClientInfo {
   private ClientPlayer clientPlayer;
   private FreakyVilleServer currentServer;
   private FreakyVilleServer lastServer;
+  private Prison prison;
   private boolean hasUpdatedToCurrentServer;
 
   public ClientInfo(ClientPlayer clientPlayer) {
     this.clientPlayer = clientPlayer;
     this.currentServer = FreakyVilleServer.NONE;
     this.lastServer = FreakyVilleServer.NONE;
+    this.prison = null;
     this.hasUpdatedToCurrentServer = false;
   }
 
@@ -42,6 +46,14 @@ public class ClientInfo {
 
   public void setLastServer(FreakyVilleServer lastServer) {
     this.lastServer = lastServer;
+  }
+
+  public Optional<Prison> getPrison() {
+    return Optional.of(prison);
+  }
+
+  public void setPrison(Prison prison) {
+    this.prison = prison;
   }
 
   public boolean isUpdatedToCurrentServer() {
