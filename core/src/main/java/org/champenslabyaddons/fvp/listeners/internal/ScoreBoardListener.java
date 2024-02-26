@@ -1,6 +1,7 @@
 package org.champenslabyaddons.fvp.listeners.internal;
 
 import net.labymod.api.Laby;
+import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
 import net.labymod.api.event.Subscribe;
@@ -12,9 +13,11 @@ import org.champenslabyaddons.fvp.util.FreakyVilleServer;
 
 public class ScoreBoardListener {
   private final ClientInfo clientInfo;
+  private final CommandService commandService;
 
-  public ScoreBoardListener(ClientInfo clientInfo) {
+  public ScoreBoardListener(ClientInfo clientInfo, CommandService commandService) {
     this.clientInfo = clientInfo;
+    this.commandService = commandService;
   }
 
   @Subscribe
@@ -33,9 +36,7 @@ public class ScoreBoardListener {
     }
     String titleText = titleTextBuilder.toString();
     if (titleText.matches("[a-zA-Z ]*") && !titleText.isEmpty()) {
-      this.clientInfo.setCurrentServer(FreakyVilleServer.fromString(titleText.trim()));
-      this.clientInfo.setHasUpdatedToCurrentServer(true);
-      Laby.fireEvent(new RequestEvent(RequestType.DISCORD_RPC));
+      updateClientAndRPC(titleText);
     } else {
       for (Component child : title.getChildren()) {
         String text = ((TextComponent) child).getText();
@@ -44,12 +45,19 @@ public class ScoreBoardListener {
         }
         text = text.replaceAll("[^a-zA-Z \\.]", "").trim();
         if (text.matches("[a-zA-Z ]+")) {
-          this.clientInfo.setCurrentServer(FreakyVilleServer.fromString(text.trim()));
-          this.clientInfo.setHasUpdatedToCurrentServer(true);
-          Laby.fireEvent(new RequestEvent(RequestType.DISCORD_RPC));
+          updateClientAndRPC(text);
           break;
         }
       }
     }
+  }
+
+  private void updateClientAndRPC(String text) {
+    this.clientInfo.setCurrentServer(FreakyVilleServer.fromString(text.trim()));
+    this.clientInfo.setHasUpdatedToCurrentServer(true);
+    if (this.clientInfo.getCurrentServer() == FreakyVilleServer.PRISON) {
+      this.commandService.fireCommand("/list", new String[]{});
+    }
+    Laby.fireEvent(new RequestEvent(RequestType.DISCORD_RPC));
   }
 }

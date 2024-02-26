@@ -29,7 +29,7 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
 
     Laby.references().addonIntegrationService()
         .registerIntegration("labyswaypoints", WaypointsIntegration.class);
-    this.registerListener(new ScoreBoardListener(clientInfo));
+    this.registerListener(new ScoreBoardListener(clientInfo, commandService));
     this.registerListener(new ServerNavigationListener(clientInfo));
 
     ModuleService moduleService = new ModuleService(this.logger());
