@@ -32,7 +32,7 @@ public class CellModule extends CombinedModule {
   @Override
   protected ArrayList<Command> moduleCommandsOverview() {
     ArrayList<Command> commands = new ArrayList<>();
-    commands.add(new CellWaypointCommand(cellList));
+    commands.add(new CellWaypointCommand(clientInfo, cellList));
     return commands;
   }
 
