@@ -1,11 +1,13 @@
 package org.champenslabyaddons.fvp.listeners.internal;
 
+import net.labymod.api.event.Priority;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
 import net.labymod.api.util.Pair;
 import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
+import org.champenslabyaddons.fvp.util.Messaging;
 import org.champenslabyaddons.fvp.util.Prison;
 import java.util.Objects;
 
@@ -16,10 +18,12 @@ public class PrisonNavigationListener {
     this.clientInfo = clientInfo;
   }
 
-  @Subscribe
+  @Subscribe(Priority.FIRST)
   public void onChatReceive(ChatReceiveEvent event) {
-    if (!this.clientInfo.isOnFreakyVille()
-        && this.clientInfo.getCurrentServer() == FreakyVilleServer.PRISON) {
+    if (!this.clientInfo.isOnFreakyVille()) {
+      return;
+    }
+    if (this.clientInfo.getCurrentServer() != FreakyVilleServer.PRISON) {
       return;
     }
     if (this.clientInfo.getPrison().isPresent()) {
@@ -33,6 +37,7 @@ public class PrisonNavigationListener {
       } catch (IllegalArgumentException e) {
         this.clientInfo.setPrison(null);
         Logging.getLogger().error("Could not find the correct prison, most functionality will not work.", e);
+        Messaging.executor().displayClientMessage("Fandt ikke blokken, de fleste funktioner vil ikke virke.");
       }
     }
   }
@@ -50,7 +55,7 @@ public class PrisonNavigationListener {
     };
   }
 
-  protected Pair<String, String> headerDecoration() {
-    return Pair.of("", "");
+  private Pair<String, String> headerDecoration() {
+    return Pair.of("----- Online Fanger i", "----");
   }
 }

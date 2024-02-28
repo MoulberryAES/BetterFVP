@@ -49,7 +49,7 @@ public class ClientInfo {
   }
 
   public Optional<Prison> getPrison() {
-    return Optional.of(prison);
+    return Optional.ofNullable(prison);
   }
 
   public void setPrison(Prison prison) {

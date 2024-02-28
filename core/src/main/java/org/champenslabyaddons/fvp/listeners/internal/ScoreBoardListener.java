@@ -10,14 +10,13 @@ import org.champenslabyaddons.fvp.connection.ClientInfo;
 import org.champenslabyaddons.fvp.event.RequestEvent;
 import org.champenslabyaddons.fvp.event.RequestEvent.RequestType;
 import org.champenslabyaddons.fvp.util.FreakyVilleServer;
+import org.champenslabyaddons.fvp.util.Messaging;
 
 public class ScoreBoardListener {
   private final ClientInfo clientInfo;
-  private final CommandService commandService;
 
-  public ScoreBoardListener(ClientInfo clientInfo, CommandService commandService) {
+  public ScoreBoardListener(ClientInfo clientInfo) {
     this.clientInfo = clientInfo;
-    this.commandService = commandService;
   }
 
   @Subscribe
@@ -56,7 +55,7 @@ public class ScoreBoardListener {
     this.clientInfo.setCurrentServer(FreakyVilleServer.fromString(text.trim()));
     this.clientInfo.setHasUpdatedToCurrentServer(true);
     if (this.clientInfo.getCurrentServer() == FreakyVilleServer.PRISON) {
-      this.commandService.fireCommand("/list", new String[]{});
+      Messaging.executor().chat("/list");
     }
     Laby.fireEvent(new RequestEvent(RequestType.DISCORD_RPC));
   }

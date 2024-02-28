@@ -6,8 +6,10 @@ import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import org.champenslabyaddons.fvp.commands.internal.CheckRollCommand;
 import org.champenslabyaddons.fvp.connection.ClientInfo;
 import org.champenslabyaddons.fvp.integrations.WaypointsIntegration;
+import org.champenslabyaddons.fvp.listeners.internal.PrisonNavigationListener;
 import org.champenslabyaddons.fvp.listeners.internal.ScoreBoardListener;
 import org.champenslabyaddons.fvp.listeners.internal.ServerNavigationListener;
 import org.champenslabyaddons.fvp.module.ModuleService;
@@ -29,8 +31,11 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
 
     Laby.references().addonIntegrationService()
         .registerIntegration("labyswaypoints", WaypointsIntegration.class);
-    this.registerListener(new ScoreBoardListener(clientInfo, commandService));
+    this.registerListener(new ScoreBoardListener(clientInfo));
     this.registerListener(new ServerNavigationListener(clientInfo));
+    this.registerListener(new PrisonNavigationListener(clientInfo));
+
+    this.registerCommand(new CheckRollCommand(clientInfo));
 
     ModuleService moduleService = new ModuleService(this.logger());
     moduleService.registerModules(
