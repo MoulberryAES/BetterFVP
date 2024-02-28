@@ -42,6 +42,16 @@
       "in": "I %s",
       "playing": "Spiller på %s",
       "lastSeen": "Sidst set på %s"
+    },
+    "commands": {
+      "checkRoll": {
+        "header": "Check Roll",
+        "wheel": {
+          "header": "Hjul: %s",
+          "winner": "Vinder: %s",
+          "tooManyOptions": "For mange navne at vise, du kan kun se vinderen"
+        }
+      }
     }
   }
 }
