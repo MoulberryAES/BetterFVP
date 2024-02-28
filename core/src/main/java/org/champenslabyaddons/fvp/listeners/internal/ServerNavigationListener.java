@@ -22,12 +22,14 @@ public class ServerNavigationListener {
     if (!this.isValidServerAddress(event.serverData().address().getHost())) {
       this.clientInfo.setCurrentServer(FreakyVilleServer.NONE);
       this.clientInfo.setLastServer(FreakyVilleServer.NONE);
+      this.clientInfo.setPrison(null);
       this.clientInfo.setHasUpdatedToCurrentServer(false);
       return;
     }
     this.clientInfo.setClientPlayer(Laby.labyAPI().minecraft().getClientPlayer());
     this.clientInfo.setCurrentServer(FreakyVilleServer.HUB);
     this.clientInfo.setLastServer(this.clientInfo.getLastServer());
+    this.clientInfo.setPrison(null);
   }
 
   @Subscribe
@@ -35,6 +37,7 @@ public class ServerNavigationListener {
     if (this.clientInfo.isOnFreakyVille()) {
       this.clientInfo.setCurrentServer(FreakyVilleServer.NONE);
       this.clientInfo.setLastServer(FreakyVilleServer.NONE);
+      this.clientInfo.setPrison(null);
       this.clientInfo.setHasUpdatedToCurrentServer(false);
       Laby.labyAPI().thirdPartyService().discord().displayDefaultActivity();
     }
@@ -46,6 +49,7 @@ public class ServerNavigationListener {
       return;
     }
     this.clientInfo.setLastServer(this.clientInfo.getCurrentServer());
+    this.clientInfo.setPrison(null);
     this.clientInfo.setHasUpdatedToCurrentServer(false);
     Laby.fireEvent(new RequestEvent(RequestType.REMOVE_WAYPOINTS));
   }
