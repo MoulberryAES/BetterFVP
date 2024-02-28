@@ -10,9 +10,9 @@ version = "1.0.0"
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 labyMod {
-    defaultPackageName = "org.champenslabyaddons.fvp" //change this to your main package name (used by all modules)
+    defaultPackageName = "org.champenslabyaddons.fvplus" //change this to your main package name (used by all modules)
     addonInfo {
-        namespace = "fvp"
+        namespace = "fvplus"
         displayName = "FreakyVille+"
         author = "Champen_V1ldtand"
         description = "FV+"
