@@ -52,7 +52,7 @@ public final class CellListener extends HousingListener {
     TextComponent syntax = Component.text("[", NamedTextColor.DARK_GRAY)
         .append(Component.text("/ce waypoint <celleID>", NamedTextColor.RED))
         .append(Component.text("]", NamedTextColor.DARK_GRAY));
-    return Component.translatable("fvp.server.prison.cell.commands.waypoint.description", NamedTextColor.WHITE, syntax);
+    return Component.translatable("fvplus.server.prison.cell.commands.waypoint.description", NamedTextColor.WHITE, syntax);
   }
 
   @Override
@@ -72,7 +72,7 @@ public final class CellListener extends HousingListener {
         return Component.empty();
       }
       TextComponent cellComponent = Component.text(cellBlock.getLocationDescription(), NamedTextColor.GRAY);
-      return Component.translatable("fvp.server.prison.cell.location", NamedTextColor.AQUA, cellComponent);
+      return Component.translatable("fvplus.server.prison.cell.location", NamedTextColor.AQUA, cellComponent);
     }
     return Component.empty();
   }

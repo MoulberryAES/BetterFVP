@@ -1,9 +1,27 @@
 {
-  "fvp": {
+  "fvplus": {
     "settings": {
       "name": "FreakyVille+",
       "enabled": {
-        "name": "Enabled"
+        "name": "Slået til"
+      },
+      "prisonSubSettings": {
+        "name": "NPrison",
+        "enabled": {
+          "name": "Slået til"
+        },
+        "enabledCellModule": {
+          "name": "Aktiver Celle relaterede funktioner"
+        }
+      },
+      "discordSubSettings": {
+        "name": "Discord",
+        "enabled": {
+          "name": "Slået til"
+        },
+        "showCurrentServer": {
+          "name": "Vis hvilken server du er på, (f.eks. KitPvP)"
+        }
       }
     },
     "server": {

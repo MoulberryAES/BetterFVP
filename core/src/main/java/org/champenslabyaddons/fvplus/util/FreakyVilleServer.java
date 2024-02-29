@@ -10,12 +10,12 @@ import net.labymod.api.util.I18n;
  * Den indeholder også repræsentationer af servere, der ikke længere er tilgængelige.
  */
 public enum FreakyVilleServer {
-  PRISON("fvp.server.prison.name"),
-  CREATIVE("fvp.server.creative.name"),
-  SKY_BLOCK("fvp.server.skyBlock.name"),
-  THE_CITY("fvp.server.city.name"),
-  KIT_PVP("fvp.server.kitpvp.name"),
-  HUB("fvp.server.hub.name"),
+  PRISON("fvplus.server.prison.name"),
+  CREATIVE("fvplus.server.creative.name"),
+  SKY_BLOCK("fvplus.server.skyBlock.name"),
+  THE_CITY("fvplus.server.city.name"),
+  KIT_PVP("fvplus.server.kitpvp.name"),
+  HUB("fvplus.server.hub.name"),
   NONE(""),
 
   /**

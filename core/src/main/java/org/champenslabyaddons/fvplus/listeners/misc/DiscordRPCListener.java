@@ -46,7 +46,7 @@ public class DiscordRPCListener {
     }
 
     if (!configuration.getShowCurrentServer().get()) {
-      description = I18n.translate("fvp.rpc.playing", "FreakyVille");
+      description = I18n.translate("fvplus.rpc.playing", "FreakyVille");
       acBuilder.details(description);
       acBuilder.largeAsset(getServerAsset(FreakyVilleServer.HUB));
       labyAPI.thirdPartyService().discord().displayActivity(acBuilder.build());
@@ -55,17 +55,17 @@ public class DiscordRPCListener {
     }
 
     if (clientInfo.getCurrentServer() == FreakyVilleServer.HUB) {
-      description = I18n.translate("fvp.rpc.in", FreakyVilleServer.HUB.getTranslatedName());
+      description = I18n.translate("fvplus.rpc.in", FreakyVilleServer.HUB.getTranslatedName());
       if (clientInfo.getLastServer() != FreakyVilleServer.NONE
           && clientInfo.getLastServer() != FreakyVilleServer.HUB) {
-        state = I18n.translate("fvp.rpc.lastSeen",
+        state = I18n.translate("fvplus.rpc.lastSeen",
             clientInfo.getLastServer().getTranslatedName());
       }
     } else if (clientInfo.getCurrentServer() != FreakyVilleServer.NONE
         && clientInfo.getCurrentServer() != null) {
-      description = I18n.translate("fvp.rpc.playing", clientInfo.getCurrentServer().getTranslatedName());
+      description = I18n.translate("fvplus.rpc.playing", clientInfo.getCurrentServer().getTranslatedName());
     } else {
-      description = I18n.translate("fvp.rpc.playing", "FreakyVille");
+      description = I18n.translate("fvplus.rpc.playing", "FreakyVille");
     }
     acBuilder.details(description);
     if (!state.isEmpty()) {

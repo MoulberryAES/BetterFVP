@@ -28,23 +28,23 @@ public class CellWaypointCommand extends Command {
     if (!arguments[0].equalsIgnoreCase("waypoint")
         && !arguments[0].equalsIgnoreCase("w")) return false;
     if (!WaypointsIntegration.isEnabled()) {
-      displayMessage(Component.translatable("fvp.server.prison.cell.commands.waypoint.disabled",
+      displayMessage(Component.translatable("fvplus.server.prison.cell.commands.waypoint.disabled",
           NamedTextColor.RED));
       return true;
     }
     if (!cellList.isCellListed(arguments[1])) {
-      displayMessage(Component.translatable("fvp.server.prison.cell.commands.waypoint.notListed",
+      displayMessage(Component.translatable("fvplus.server.prison.cell.commands.waypoint.notListed",
           NamedTextColor.RED));
       return true;
     }
     if (cellList.getCorrespondingCellBlock(arguments[1]).isEmpty()) {
-      displayMessage(Component.translatable("fvp.server.prison.cell.commands.waypoint.emptyResult",
+      displayMessage(Component.translatable("fvplus.server.prison.cell.commands.waypoint.emptyResult",
           NamedTextColor.RED));
       return true;
     }
     CellBlock cellBlock = cellList.getCorrespondingCellBlock(arguments[1]).get();
     Laby.fireEvent(new CreateLocationWaypointEvent(cellBlock.getLocationDescription(), cellBlock.getMinecraftLocation()));
-    displayMessage(Component.translatable("fvp.server.prison.cell.commands.waypoint.success",
+    displayMessage(Component.translatable("fvplus.server.prison.cell.commands.waypoint.success",
       NamedTextColor.GREEN));
     return true;
   }

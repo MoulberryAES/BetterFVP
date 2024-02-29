@@ -45,7 +45,7 @@ public class CheckRollCommand extends Command {
   }
 
   private void displayInChat(Wheel wheel) {
-    String rollKey = "fvp.commands.checkRoll.";
+    String rollKey = "fvplus.commands.checkRoll.";
     String header = " -= [ " + I18n.getTranslation(rollKey + "header") + " ] =-";
     ZonedDateTime timestamp = ZonedDateTime.parse(wheel.getCreatedAt(), DateTimeFormatter.ISO_ZONED_DATE_TIME);
     String formattedTimestamp = timestamp.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
