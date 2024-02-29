@@ -11,10 +11,12 @@ public abstract class CombinedModule implements Module {
   protected List<Command> moduleCommands;
   private final EventBus eventBus;
   protected List<Object> moduleListeners;
+  private boolean registered;
 
   public CombinedModule(CommandService commandService, EventBus eventBus) {
     this.commandService = commandService;
     this.eventBus = eventBus;
+    this.registered = false;
   }
 
   @Override
@@ -25,6 +27,7 @@ public abstract class CombinedModule implements Module {
     for (Object listener : this.moduleListeners) {
       this.eventBus.registerListener(listener);
     }
+    this.registered = true;
   }
 
   @Override
@@ -35,6 +38,7 @@ public abstract class CombinedModule implements Module {
     for (Object listener : this.moduleListeners) {
       this.eventBus.unregisterListener(listener);
     }
+    this.registered = false;
   }
 
   protected abstract ArrayList<Command> moduleCommandsOverview();
@@ -43,4 +47,8 @@ public abstract class CombinedModule implements Module {
 
   @Override
   public abstract boolean shouldRegisterAutomatically();
+
+  public boolean isRegistered() {
+    return this.registered;
+  }
 }

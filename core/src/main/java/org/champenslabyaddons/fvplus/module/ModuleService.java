@@ -7,22 +7,26 @@ import java.util.List;
 
 public class ModuleService {
   private final Logging logger;
-  private final List<Module> registeredModules;
+  private final List<Module> modules;
 
   public ModuleService(Logging logger) {
     this.logger = logger;
-    this.registeredModules = new ArrayList<>();
+    this.modules = new ArrayList<>();
   }
 
   /**
-   * Registrere et enkelt modul, der er ikke et check for om modulet bør registreres.
+   * Registrere et enkelt modul.
    *
    * @param module Modulet du vil registrere
-   * @apiNote Lad være med at benytte denne medmindre du ved hvad du laver.
    */
   public void registerModule(Module module) {
+    if (module.isRegistered()) {
+      return;
+    }
     module.register();
-    registeredModules.add(module);
+    if (!modules.contains(module)) {
+      modules.add(module);
+    }
     String registrationMessage = "REGISTERED MODULE | " + module.getClass().getTypeName();
     if (module instanceof BigModule) {
       registrationMessage += (" " + Arrays.toString(((BigModule) module).internalModulesOverview().toArray(new Module[0])));
@@ -49,8 +53,10 @@ public class ModuleService {
    * @apiNote Lad være med at fjerne et registreret modul hvis det ikke er meningen.
    */
   public void unregisterModule(Module module) {
+    if (!module.isRegistered()) {
+      return;
+    }
     module.unregister();
-    registeredModules.remove(module);
     logger.info("UNREGISTERED MODULE | " + module.getClass().getTypeName());
   }
 
@@ -60,8 +66,12 @@ public class ModuleService {
    */
   @Deprecated(since = "pre-1.0.0")
   public void unregisterAllModules() {
-    for (Module module : registeredModules) {
+    for (Module module : modules) {
       unregisterModule(module);
     }
+  }
+
+  public List<Module> getModules() {
+    return List.copyOf(modules);
   }
 }

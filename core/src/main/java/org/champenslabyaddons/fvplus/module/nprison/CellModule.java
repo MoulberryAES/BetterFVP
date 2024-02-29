@@ -5,6 +5,7 @@ import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.commands.CellWaypointCommand;
+import org.champenslabyaddons.fvplus.configuration.PrisonSubConfiguration;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.internal.CellList;
 import org.champenslabyaddons.fvplus.listeners.nprison.CellListener;
@@ -13,10 +14,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CellModule extends CombinedModule {
+
   private final ClientInfo clientInfo;
   private final CellList cellList;
+  private final PrisonSubConfiguration prisonSubConfiguration;
 
-  public CellModule(CommandService commandService, EventBus eventBus, ClientInfo clientInfo) {
+  public CellModule(CommandService commandService, EventBus eventBus, ClientInfo clientInfo,
+      PrisonSubConfiguration prisonSubConfiguration) {
     super(commandService, eventBus);
     this.clientInfo = clientInfo;
     this.cellList = new CellList();
@@ -25,8 +29,9 @@ public class CellModule extends CombinedModule {
     } catch (IOException e) {
       Logging.getLogger().error("Caught Exception upon trying to load the cells.", e);
     }
+    this.prisonSubConfiguration = prisonSubConfiguration;
     this.moduleCommands = moduleCommandsOverview();
-    this.moduleListeners= moduleListenersOverview();
+    this.moduleListeners = moduleListenersOverview();
   }
 
   @Override
@@ -45,6 +50,6 @@ public class CellModule extends CombinedModule {
 
   @Override
   public boolean shouldRegisterAutomatically() {
-    return true;
+    return prisonSubConfiguration.getEnabledCellModule().get();
   }
 }

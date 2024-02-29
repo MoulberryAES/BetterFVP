@@ -12,6 +12,7 @@ import org.champenslabyaddons.fvplus.integrations.WaypointsIntegration;
 import org.champenslabyaddons.fvplus.listeners.internal.PrisonNavigationListener;
 import org.champenslabyaddons.fvplus.listeners.internal.ScoreBoardListener;
 import org.champenslabyaddons.fvplus.listeners.internal.ServerNavigationListener;
+import org.champenslabyaddons.fvplus.listeners.internal.ModuleListener;
 import org.champenslabyaddons.fvplus.module.ModuleService;
 import org.champenslabyaddons.fvplus.module.general.RPCModule;
 import org.champenslabyaddons.fvplus.module.nprison.NPrisonModule;
@@ -40,8 +41,10 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     ModuleService moduleService = new ModuleService(this.logger());
     moduleService.registerModules(
         new RPCModule(eventBus, clientInfo, labyAPI(), configuration().getDiscordSubSettings()),
-        new NPrisonModule(moduleService, commandService, eventBus, clientInfo)
+        new NPrisonModule(moduleService, commandService, eventBus, clientInfo, configuration().getPrisonSubSettings())
     );
+
+    this.registerListener(new ModuleListener(moduleService));
 
     this.logger().info("Enabled the Addon");
   }

@@ -8,9 +8,12 @@ import java.util.List;
 public abstract class CommandModule implements Module {
   private final CommandService commandService;
   protected List<Command> moduleCommands;
+  private boolean registered;
 
   public CommandModule(CommandService commandService) {
     this.commandService = commandService;
+    this.moduleCommands = this.moduleCommandsOverview();
+    this.registered = false;
   }
 
   @Override
@@ -18,6 +21,7 @@ public abstract class CommandModule implements Module {
     for (Command command : this.moduleCommands) {
       this.commandService.register(command);
     }
+    this.registered = true;
   }
 
   @Override
@@ -25,10 +29,15 @@ public abstract class CommandModule implements Module {
     for (Command command : this.moduleCommands) {
       this.commandService.unregister(command);
     }
+    this.registered = false;
   }
 
   protected abstract ArrayList<Command> moduleCommandsOverview();
 
   @Override
   public abstract boolean shouldRegisterAutomatically();
+
+  public boolean isRegistered() {
+    return this.registered;
+  }
 }
