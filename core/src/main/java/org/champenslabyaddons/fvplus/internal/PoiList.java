@@ -36,6 +36,14 @@ public class PoiList implements Manager {
     connection.disconnect();
   }
 
+  public void getByActivationPair(String activationPair) {
+    for (POI poi : this.pois) {
+      if (poi.getActivationPair().equals(activationPair)) {
+        //return poi;
+      }
+    }
+  }
+
   public List<POI> getPois() {
     return List.copyOf(this.pois);
   }

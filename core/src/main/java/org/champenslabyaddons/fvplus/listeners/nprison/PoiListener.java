@@ -8,6 +8,7 @@ import org.champenslabyaddons.fvplus.objects.POI;
 import java.util.Objects;
 
 public class PoiListener {
+
   private final ClientInfo clientInfo;
   private final PoiList poiList;
 
@@ -22,38 +23,52 @@ public class PoiListener {
     }
     String plainMessage = event.chatMessage().getPlainText().trim();
     this.poiList.getPois().forEach(poi -> {
-      if (isVagtVault(plainMessage)) {
-        handleVagtVault(poi, plainMessage);
+      if (!isPoiMessage(poi, plainMessage)) {
+        return;
       }
+      handle(poi, plainMessage);
     });
   }
 
-  private void handleVagtVault(POI poi, String message) {
-    String demystifiedMessage = removePlayerFromString(poi, message);
+  private void handle(POI poi, String message) {
+    String demystifiedMessage = message.replace(getPlayerFromString(poi, message), "").trim();
     if (demystifiedMessage.equals(pairToString(poi.getActivationPair()))) {
-
+      activation(poi);
     } else if (demystifiedMessage.equals(pairToString(poi.getCancelationPair()))) {
-
+      cancellation(poi);
     }
   }
 
-  private String removePlayerFromString(POI poi, String message) {
+  private void activation(POI poi) {
+
+  }
+
+  private void cancellation(POI poi) {
+
+  }
+
+  private String getPlayerFromString(POI poi, String message) {
     String player = "";
     if (message.startsWith(Objects.requireNonNull(poi.getActivationPair().getFirst())) &&
         message.endsWith(Objects.requireNonNull(poi.getActivationPair().getSecond()))) {
-      player =  message.substring(poi.getActivationPair().getFirst().length() + 1, message.length() - poi.getActivationPair().getSecond().length());
+      player = message.substring(poi.getActivationPair().getFirst().length() + 1,
+          message.length() - poi.getActivationPair().getSecond().length());
     } else if (message.startsWith(Objects.requireNonNull(poi.getCancelationPair().getFirst())) &&
         message.endsWith(Objects.requireNonNull(poi.getCancelationPair().getSecond()))) {
-      player =  message.substring(poi.getCancelationPair().getFirst().length() + 1, message.length() - poi.getCancelationPair().getSecond().length());
+      player = message.substring(poi.getCancelationPair().getFirst().length() + 1,
+          message.length() - poi.getCancelationPair().getSecond().length());
     }
-    return message.replace(player, "").trim();
+    return player;
   }
 
   private String pairToString(Pair<String, String> pair) {
-    return pair.getFirst() + " " + pair.getSecond();
+    return pair.getFirst() + pair.getSecond();
   }
 
-  private boolean isVagtVault(String message) {
-    return message.startsWith("VAGT-ALARM:");
+  private boolean isPoiMessage(POI poi, String message) {
+    return (message.startsWith(Objects.requireNonNull(poi.getActivationPair().getFirst()))
+        && message.endsWith(Objects.requireNonNull(poi.getActivationPair().getSecond()))) || (
+        message.startsWith(Objects.requireNonNull(poi.getCancelationPair().getFirst()))
+            && message.endsWith(Objects.requireNonNull(poi.getCancelationPair().getSecond())));
   }
 }
