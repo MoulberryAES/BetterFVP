@@ -4,7 +4,13 @@ import net.labymod.api.event.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * En superklasse for alle moduler der har en intention om at lytte til events.
+ *
+ * @since 1.0.0
+ */
 public abstract class ListenerModule implements Module {
+
   private final EventBus eventBus;
   protected List<Object> moduleListeners;
   private boolean registered;
@@ -30,6 +36,11 @@ public abstract class ListenerModule implements Module {
     this.registered = false;
   }
 
+  /**
+   * Returnerer en oversigt over alle listeners i modulet.
+   *
+   * @return en liste af listeners i modulet
+   */
   protected abstract ArrayList<Object> moduleListenersOverview();
 
   @Override

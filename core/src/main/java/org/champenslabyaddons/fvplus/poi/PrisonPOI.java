@@ -4,7 +4,18 @@ import net.labymod.api.util.Pair;
 import org.champenslabyaddons.fvplus.util.FreakyVilleServer;
 import org.champenslabyaddons.fvplus.util.Prison;
 
+/**
+ * Repræsenteret et Point of Interest (POI) på NPrison.
+ * <p>
+ * Denne klasse har funktionalitet specifikt til at hjælpe med at vurdere om en POI håndteres
+ * korrekt ud fra den specifikke fængselsblok man befinder sig i på NPrison.
+ *
+ * @see POI
+ * @see Prison
+ * @since 1.0.0
+ */
 public class PrisonPOI extends POI {
+
   private final Prison[] whereCanItBeUpdated;
 
   public PrisonPOI(String identifier, String displayName,

@@ -17,7 +17,7 @@ labyMod {
         author = "Champen_V1ldtand"
         description = "FV+"
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "0.0.1")
+        version = System.getenv().getOrDefault("VERSION", "1.0.1")
     }
 
     minecraft {

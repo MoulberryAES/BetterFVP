@@ -4,6 +4,12 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * En meget simpel CSV læser, som kan læse en fil og returnere en liste af linjer.
+ * Hver linje er en liste af strenge, som er adskilt af kommaer.
+ *
+ * @since 1.0.0
+ */
 public class Csv {
   private final BufferedReader bufferedReader;
 
