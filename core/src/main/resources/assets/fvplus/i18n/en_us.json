@@ -12,6 +12,9 @@
         },
         "enabledCellModule": {
           "name": "Aktiver Celle relaterede funktioner"
+        },
+        "enabledPoiModule": {
+          "name": "Aktiver Timer relaterede funktioner"
         }
       },
       "discordSubSettings": {
@@ -107,6 +110,18 @@
       },
       "APLUS_VV": {
         "name": "A+ Bank timer"
+      },
+      "B_BO": {
+        "name": "B Bande-Område timer"
+      },
+      "A_BO": {
+        "name": "A Bande-Område timer"
+      },
+      "BPLUS_BO": {
+        "name": "B+ Bande-Område timer"
+      },
+      "APLUS_BO": {
+        "name": "A+ Bande-Område timer"
       }
     }
   }

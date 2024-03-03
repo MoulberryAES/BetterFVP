@@ -5,6 +5,7 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.util.logging.Logging;
+import org.champenslabyaddons.fvplus.configuration.PrisonSubConfiguration;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.internal.PoiList;
 import org.champenslabyaddons.fvplus.listeners.nprison.PoiListener;
@@ -21,8 +22,10 @@ public class PoiModule extends ListenerModule {
   private final HudWidgetRegistry hudWidgetRegistry;
   private final PoiList poiList;
   private final List<PoiTimerWidget> poiTimerWidgets;
+  private final PrisonSubConfiguration prisonSubConfiguration;
 
-  public PoiModule(EventBus eventBus, ClientInfo clientInfo, HudWidgetRegistry hudWidgetRegistry, PoiList poiList) {
+  public PoiModule(EventBus eventBus, ClientInfo clientInfo, HudWidgetRegistry hudWidgetRegistry, PoiList poiList,
+      PrisonSubConfiguration prisonSubConfiguration) {
     super(eventBus);
     this.clientInfo = clientInfo;
     this.hudWidgetRegistry = hudWidgetRegistry;
@@ -32,6 +35,7 @@ public class PoiModule extends ListenerModule {
     } catch (IOException e) {
       Logging.getLogger().error("Caught Exception upon trying to load the POIS.", e);
     }
+    this.prisonSubConfiguration = prisonSubConfiguration;
     this.moduleListeners = moduleListenersOverview();
     this.poiTimerWidgets = modulePoiWidgets();
   }
@@ -65,13 +69,13 @@ public class PoiModule extends ListenerModule {
     for (POI poi : poiList.getPois()) {
       widgets.add(new PoiTimerWidget(poi, clientInfo, Icon.sprite16(
           ResourceLocation.create("fvplus",
-              "themes/vanilla/textures/settings/icons.png"), 0, 0)));
+              "themes/vanilla/textures/settings/icons.png"), 2, 0)));
     }
     return widgets;
   }
 
   @Override
   public boolean shouldRegisterAutomatically() {
-    return true;
+    return prisonSubConfiguration.getEnabledPoiModule().get();
   }
 }
