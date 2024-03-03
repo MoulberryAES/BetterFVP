@@ -15,7 +15,7 @@ labyMod {
         namespace = "fvplus"
         displayName = "FreakyVille+"
         author = "Champen_V1ldtand"
-        description = "FV+"
+        description = "A collection of QOL changes for FreakyVille"
         minecraftVersion = "*"
         version = System.getenv().getOrDefault("VERSION", "1.0.1")
     }
