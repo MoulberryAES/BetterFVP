@@ -6,6 +6,8 @@ plugins {
 
 dependencies {
     api(project(":api"))
+
+    addon("labyswaypoints", true, "net.labymod.addons:waypoints:1.0.0")
 }
 
 labyModProcessor {

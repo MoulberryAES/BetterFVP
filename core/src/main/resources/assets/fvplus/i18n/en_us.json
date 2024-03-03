@@ -1,0 +1,113 @@
+{
+  "fvplus": {
+    "settings": {
+      "name": "FreakyVille+",
+      "enabled": {
+        "name": "Slået til"
+      },
+      "prisonSubSettings": {
+        "name": "NPrison",
+        "enabled": {
+          "name": "Slået til"
+        },
+        "enabledCellModule": {
+          "name": "Aktiver Celle relaterede funktioner"
+        }
+      },
+      "discordSubSettings": {
+        "name": "Discord",
+        "enabled": {
+          "name": "Slået til"
+        },
+        "showCurrentServer": {
+          "name": "Vis hvilken server du er på, (f.eks. KitPvP)"
+        }
+      }
+    },
+    "server": {
+      "prison": {
+        "name": "NPrison",
+        "cell": {
+          "location": "Lokation: %s",
+          "commands": {
+            "waypoint": {
+              "description": "%s Opret et midlertidigt waypoint til den angivne celle",
+              "notListed": "Cellen er kunne ikke findes",
+              "emptyResult": "Cellen kunne ikke bindes til en lokation",
+              "disabled": "Du skal have aktiveret / installeret Laby's Waypoints for at bruge denne funktion",
+              "success": "Waypoint oprettet"
+            }
+          }
+        },
+        "poi": {
+          "willNotUpdate": "Den registrerede ændring i dette Point of interest vil ikke blive inkluderet, da den forekommer unaturligt."
+        }
+      },
+      "city": {
+        "name": "Friheden"
+      },
+      "kitpvp": {
+        "name": "KitPvP"
+      },
+      "skyBlock": {
+        "name": "SkyBlock"
+      },
+      "creative": {
+        "name": "Kreativ"
+      },
+      "hub": {
+        "name": "Hubben"
+      }
+    },
+    "rpc": {
+      "in": "I %s",
+      "playing": "Spiller på %s",
+      "lastSeen": "Sidst set på %s"
+    },
+    "commands": {
+      "checkRoll": {
+        "header": "Check Roll",
+        "wheel": {
+          "header": "Hjul: %s",
+          "winner": "Vinder: %s",
+          "tooManyOptions": "For mange navne at vise, du kan kun se vinderen"
+        }
+      }
+    },
+    "logging": {
+
+    },
+    "widgets": {
+      "timer": {
+        "timeLeft": {
+          "isTakeable": "Kan blive overtaget",
+          "unavailable": "Ikke tilgængeligt",
+          "cantKnowForSure": "Opdateres ikke",
+          "format": {
+            "all": "%s, %s",
+            "hours": "%st",
+            "minutes": "%sm",
+            "seconds": "%ss"
+          }
+        }
+      }
+    },
+    "hudWidget": {
+      "C_VV": {
+        "name": "C Vagt-Vault timer"
+      },
+      "B_VV": {
+        "name": "B Vagt-Vault timer"
+      },
+      "A_VV": {
+        "name": "A Vagt-Vault timer"
+      },
+      "BPLUS_VV": {
+        "name": "B+ Bank timer"
+      },
+      "APLUS_VV": {
+        "name": "A+ Bank timer"
+      }
+    }
+  }
+}
