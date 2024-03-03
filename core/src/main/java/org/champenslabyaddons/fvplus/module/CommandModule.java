@@ -5,7 +5,13 @@ import net.labymod.api.client.chat.command.CommandService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * En superklasse for alle moduler der har en intention om at registrere kommandoer.
+ *
+ * @since 1.0.0
+ */
 public abstract class CommandModule implements Module {
+
   private final CommandService commandService;
   protected List<Command> moduleCommands;
   private boolean registered;
@@ -32,6 +38,11 @@ public abstract class CommandModule implements Module {
     this.registered = false;
   }
 
+  /**
+   * Returnerer en oversigt over alle kommandoer i modulet.
+   *
+   * @return en liste af kommandoer i modulet
+   */
   protected abstract ArrayList<Command> moduleCommandsOverview();
 
   @Override

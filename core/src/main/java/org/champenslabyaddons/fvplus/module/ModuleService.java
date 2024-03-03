@@ -5,7 +5,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Denne klasse håndtere alle {@link Module} objekterne.
+ * <p>
+ * Denne klasse er en del af et modulært system, som gør det muligt at registrere og fjerne moduler
+ * fra en liste. Dette er en del af en større struktur, som gør det muligt at håndtere moduler på en
+ * nem og overskuelig måde.
+ * <p>
+ * Grunden til at vi har denne klasse er fordi vi vil have en centraliseret måde at håndtere moduler
+ * på, så vi ikke skal lave for meget kode for at håndtere moduler. Hele systemet er bygget op
+ * omkring denne klasse, og det er derfor vigtigt at den ikke modtager for mange ændringer uden at
+ * det er nødvendigt.
+ *
+ * @since 1.0.0
+ */
 public class ModuleService {
+
   private final Logging logger;
   private final List<Module> modules;
 
@@ -29,7 +44,8 @@ public class ModuleService {
     }
     String registrationMessage = "REGISTERED MODULE | " + module.getClass().getTypeName();
     if (module instanceof BigModule) {
-      registrationMessage += (" " + Arrays.toString(((BigModule) module).internalModulesOverview().toArray(new Module[0])));
+      registrationMessage += (" " + Arrays.toString(
+          ((BigModule) module).internalModulesOverview().toArray(new Module[0])));
     }
     logger.info(registrationMessage);
   }
@@ -49,6 +65,7 @@ public class ModuleService {
 
   /**
    * Fjerner et modul fra listen over registrerede moduler.
+   *
    * @param module Modulet du vil fjerne
    * @apiNote Lad være med at fjerne et registreret modul hvis det ikke er meningen.
    */
@@ -62,7 +79,9 @@ public class ModuleService {
 
   /**
    * Fjerner alle registrerede moduler fra listen.
-   * @deprecated Det er ikke sikkert der vil være et behov for metoden. Vi har den her til hvis den skulle blive nødvendig.
+   *
+   * @deprecated Det er ikke sikkert der vil være et behov for metoden. Vi har den her til hvis den
+   * skulle blive nødvendig.
    */
   @Deprecated(since = "pre-1.0.0")
   public void unregisterAllModules() {

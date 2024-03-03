@@ -1,5 +1,8 @@
 package org.champenslabyaddons.fvplus.objects;
 
+/**
+ * Repræsenterer data om en lykkehjuls forespørgsel på <a href="https://freakyville.dk">FreakyVilles Hjemmeside</a>
+ */
 public class WheelData {
   private final boolean success;
   private final Wheel wheel;
@@ -17,6 +20,9 @@ public class WheelData {
     return this.wheel;
   }
 
+  /**
+   * Repræsenterer en mulighed på et lykkehjul
+   */
   public class Option {
     private final String option;
 
@@ -29,6 +35,9 @@ public class WheelData {
     }
   }
 
+  /**
+   * Repræsenterer et lykkehjul
+   */
   public class Wheel {
     private final String id;
     private final Option[] options;

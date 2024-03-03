@@ -6,6 +6,11 @@ import net.labymod.api.event.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * En superklasse for alle moduler der blander både commands og listeners.
+ *
+ * @since 1.0.0
+ */
 public abstract class CombinedModule implements Module {
   private final CommandService commandService;
   protected List<Command> moduleCommands;
@@ -41,8 +46,18 @@ public abstract class CombinedModule implements Module {
     this.registered = false;
   }
 
+  /**
+   * Returnerer en oversigt over alle commands i modulet.
+   *
+   * @return en liste af commands i modulet
+   */
   protected abstract ArrayList<Command> moduleCommandsOverview();
 
+  /**
+   * Returnerer en oversigt over alle listeners i modulet.
+   *
+   * @return en liste af listeners i modulet
+   */
   protected abstract ArrayList<Object> moduleListenersOverview();
 
   @Override

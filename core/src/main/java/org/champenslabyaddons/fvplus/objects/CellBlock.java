@@ -2,6 +2,9 @@ package org.champenslabyaddons.fvplus.objects;
 
 import org.champenslabyaddons.fvplus.util.Location;
 
+/**
+ * Repræsenterer et område med celler på Prison.
+ */
 public class CellBlock {
   private final String cellType;
   private final int smallestId;
