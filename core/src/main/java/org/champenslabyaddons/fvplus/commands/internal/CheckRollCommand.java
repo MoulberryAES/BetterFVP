@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 public class CheckRollCommand extends Command {
   private final ClientInfo clientInfo;
@@ -30,17 +32,22 @@ public class CheckRollCommand extends Command {
     if (arguments[0].length() != 36) return true;
     String uniqueId = arguments[0];
 
-    InputStreamReader reader = null;
-    try {
-      URL url = new URL("https://freakyville.dk/api/wheel/" + uniqueId);
-      reader = new InputStreamReader(url.openStream());
-    } catch (Exception e) {
-      Logging.getLogger().error("Could not fetch the wheel data.", e);
-      return true;
-    }
-
-    WheelData data = new Gson().fromJson(reader, WheelData.class);
-    displayInChat(data.getWheel());
+    CompletableFuture.supplyAsync(() -> {
+      try {
+        URL url = new URL("https://freakyville.dk/api/wheel/" + uniqueId);
+        InputStreamReader reader = new InputStreamReader(url.openStream());
+        return new Gson().fromJson(reader, WheelData.class);
+      } catch (Exception e) {
+        throw new CompletionException(e);
+      }
+    }).exceptionally(ex -> {
+      Logging.getLogger().error("Could not fetch the wheel data.", ex);
+      return null;
+    }).thenAcceptAsync(data -> {
+      if (data != null) {
+        displayInChat(data.getWheel());
+      }
+    });
     return true;
   }
 

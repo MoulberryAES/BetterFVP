@@ -15,7 +15,7 @@ public abstract class ListenerModule implements Module {
   }
 
   @Override
-  public final void register() {
+  public void register() {
     for (Object listener : this.moduleListeners) {
       this.eventBus.registerListener(listener);
     }
@@ -23,7 +23,7 @@ public abstract class ListenerModule implements Module {
   }
 
   @Override
-  public final void unregister() {
+  public void unregister() {
     for (Object listener : this.moduleListeners) {
       this.eventBus.unregisterListener(listener);
     }

@@ -72,7 +72,6 @@ public class DiscordRPCListener {
       acBuilder.state(state);
     }
     acBuilder.largeAsset(getServerAsset(clientInfo.getCurrentServer()));
-    //acBuilder.smallAsset(getPlayerAsset());
 
     this.labyAPI.thirdPartyService().discord().displayActivity(acBuilder.build());
 
@@ -109,12 +108,5 @@ public class DiscordRPCListener {
           "https://i.imgur.com/gCRkhmm.png",
           freakyVille);
     };
-  }
-
-  private Asset getPlayerAsset() {
-    String playerName = this.clientInfo.getClientPlayer().getName();
-    return Asset.of(
-        String.format("https://minotar.net/helm/%s/128.png", playerName),
-        playerName);
   }
 }

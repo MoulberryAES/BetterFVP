@@ -24,8 +24,8 @@ public class ClientInfo {
     return this.currentServer != FreakyVilleServer.NONE;
   }
 
-  public ClientPlayer getClientPlayer() {
-    return clientPlayer;
+  public Optional<ClientPlayer> getClientPlayer() {
+    return Optional.ofNullable(clientPlayer);
   }
 
   public void setClientPlayer(ClientPlayer clientPlayer) {

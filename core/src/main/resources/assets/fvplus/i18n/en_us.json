@@ -38,6 +38,9 @@
               "success": "Waypoint oprettet"
             }
           }
+        },
+        "poi": {
+          "willNotUpdate": "Den registrerede ændring i dette Point of interest vil ikke blive inkluderet, da den forekommer unaturligt."
         }
       },
       "city": {
@@ -73,6 +76,38 @@
     },
     "logging": {
 
+    },
+    "widgets": {
+      "timer": {
+        "timeLeft": {
+          "isTakeable": "Kan blive overtaget",
+          "unavailable": "Ikke tilgængeligt",
+          "cantKnowForSure": "Opdateres ikke",
+          "format": {
+            "all": "%s, %s",
+            "hours": "%st",
+            "minutes": "%sm",
+            "seconds": "%ss"
+          }
+        }
+      }
+    },
+    "hudWidget": {
+      "C_VV": {
+        "name": "C Vagt-Vault timer"
+      },
+      "B_VV": {
+        "name": "B Vagt-Vault timer"
+      },
+      "A_VV": {
+        "name": "A Vagt-Vault timer"
+      },
+      "BPLUS_VV": {
+        "name": "B+ Bank timer"
+      },
+      "APLUS_VV": {
+        "name": "A+ Bank timer"
+      }
     }
   }
 }

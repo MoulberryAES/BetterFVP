@@ -4,18 +4,23 @@ import net.labymod.api.Laby;
 import net.labymod.api.LabyAPI;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.command.CommandService;
+import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import org.champenslabyaddons.fvplus.commands.TestCommand;
 import org.champenslabyaddons.fvplus.commands.internal.CheckRollCommand;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.integrations.WaypointsIntegration;
+import org.champenslabyaddons.fvplus.internal.PoiList;
 import org.champenslabyaddons.fvplus.listeners.internal.PrisonNavigationListener;
 import org.champenslabyaddons.fvplus.listeners.internal.ScoreBoardListener;
 import org.champenslabyaddons.fvplus.listeners.internal.ServerNavigationListener;
 import org.champenslabyaddons.fvplus.listeners.internal.ModuleListener;
+import org.champenslabyaddons.fvplus.listeners.nprison.PoiListener;
 import org.champenslabyaddons.fvplus.module.ModuleService;
 import org.champenslabyaddons.fvplus.module.general.RPCModule;
 import org.champenslabyaddons.fvplus.module.nprison.NPrisonModule;
+import org.champenslabyaddons.fvplus.module.nprison.PoiModule;
 import org.champenslabyaddons.fvplus.util.Messaging;
 
 @AddonMain
@@ -29,6 +34,7 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     EventBus eventBus = labyAPI.eventBus();
     CommandService commandService = labyAPI.commandService();
     Messaging.setExecutor(labyAPI.minecraft().chatExecutor());
+    PoiList poiList = new PoiList();
 
     Laby.references().addonIntegrationService()
         .registerIntegration("labyswaypoints", WaypointsIntegration.class);
@@ -37,11 +43,13 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     this.registerListener(new PrisonNavigationListener(clientInfo));
 
     this.registerCommand(new CheckRollCommand(clientInfo));
+    this.registerCommand(new TestCommand());
 
     ModuleService moduleService = new ModuleService(this.logger());
     moduleService.registerModules(
         new RPCModule(eventBus, clientInfo, labyAPI(), configuration().getDiscordSubSettings()),
-        new NPrisonModule(moduleService, commandService, eventBus, clientInfo, configuration().getPrisonSubSettings())
+        new NPrisonModule(moduleService, commandService, eventBus, clientInfo, configuration().getPrisonSubSettings()),
+        new PoiModule(eventBus, clientInfo, labyAPI.hudWidgetRegistry(), poiList)
     );
 
     this.registerListener(new ModuleListener(moduleService));
