@@ -8,6 +8,7 @@ import net.labymod.api.configuration.loader.property.ConfigProperty;
 import org.champenslabyaddons.fvplus.event.module.ModuleEvent;
 import org.champenslabyaddons.fvplus.module.general.RPCModule;
 import org.champenslabyaddons.fvplus.module.nprison.NPrisonModule;
+import org.champenslabyaddons.fvplus.util.Setting;
 
 public class DiscordSubConfiguration extends Config {
   @ParentSwitch
@@ -18,13 +19,7 @@ public class DiscordSubConfiguration extends Config {
   private final ConfigProperty<Boolean> showCurrentServer = new ConfigProperty<>(true);
 
   public DiscordSubConfiguration() {
-    this.enabled.addChangeListener((enabled) -> {
-      if (enabled) {
-        Laby.fireEvent(new ModuleEvent(RPCModule.class, ModuleEvent.Type.ACTIVATE));
-      } else {
-        Laby.fireEvent(new ModuleEvent(RPCModule.class, ModuleEvent.Type.DEACTIVATE));
-      }
-    });
+    Setting.addModuleListener(this.enabled, RPCModule.class);
   }
 
   public ConfigProperty<Boolean> enabled() {

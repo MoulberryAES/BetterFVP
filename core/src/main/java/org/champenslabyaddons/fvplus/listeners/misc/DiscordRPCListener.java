@@ -11,6 +11,7 @@ import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.event.RequestEvent;
 import org.champenslabyaddons.fvplus.event.RequestEvent.RequestType;
 import org.champenslabyaddons.fvplus.util.FreakyVilleServer;
+import java.time.Instant;
 
 public class DiscordRPCListener {
 
@@ -35,15 +36,9 @@ public class DiscordRPCListener {
     }
 
     currentlyRunning = true;
-    DiscordActivity currentActivity = this.labyAPI.thirdPartyService().discord()
-        .getDisplayedActivity();
     Builder acBuilder = DiscordActivity.builder(this);
     String description;
     String state = "";
-
-    if (currentActivity != null) {
-      acBuilder.start(currentActivity.getStartTime());
-    }
 
     if (!configuration.getShowCurrentServer().get()) {
       description = I18n.translate("fvplus.rpc.playing", "FreakyVille");
@@ -72,6 +67,7 @@ public class DiscordRPCListener {
       acBuilder.state(state);
     }
     acBuilder.largeAsset(getServerAsset(clientInfo.getCurrentServer()));
+    acBuilder.start(Instant.now());
 
     this.labyAPI.thirdPartyService().discord().displayActivity(acBuilder.build());
 
