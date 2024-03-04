@@ -1,5 +1,6 @@
 package org.champenslabyaddons.fvplus.module;
 
+import net.labymod.api.util.I18n;
 import net.labymod.api.util.logging.Logging;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +43,7 @@ public class ModuleService {
     if (!modules.contains(module)) {
       modules.add(module);
     }
-    String registrationMessage = "REGISTERED MODULE | " + module.getClass().getTypeName();
+    String registrationMessage = I18n.translate("fvplus.logging.info.registeredModule") +  " | " + module.getClass().getTypeName();
     if (module instanceof BigModule) {
       registrationMessage += (" " + Arrays.toString(
           ((BigModule) module).internalModulesOverview().toArray(new Module[0])));
@@ -74,7 +75,7 @@ public class ModuleService {
       return;
     }
     module.unregister();
-    logger.info("UNREGISTERED MODULE | " + module.getClass().getTypeName());
+    logger.info(I18n.translate("fvplus.logging.info.unregisteredModule") + " | " + module.getClass().getTypeName());
   }
 
   /**

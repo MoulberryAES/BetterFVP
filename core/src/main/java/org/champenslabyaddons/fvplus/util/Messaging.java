@@ -1,6 +1,7 @@
 package org.champenslabyaddons.fvplus.util;
 
 import net.labymod.api.client.chat.ChatExecutor;
+import net.labymod.api.util.I18n;
 
 public final class Messaging {
   private static ChatExecutor executor;
@@ -10,7 +11,7 @@ public final class Messaging {
 
   public static void setExecutor(ChatExecutor executor) {
     if (isSet) {
-      throw new RuntimeException("You can not change the ChatExecutor later.");
+      throw new RuntimeException(I18n.translate("fvplus.logging.error.messagingAlreadySet"));
     }
     Messaging.executor = executor;
     Messaging.isSet = true;

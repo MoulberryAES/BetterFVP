@@ -28,6 +28,7 @@
       }
     },
     "server": {
+      "name": "FreakyVille",
       "prison": {
         "name": "NPrison",
         "cell": {
@@ -78,7 +79,20 @@
       }
     },
     "logging": {
-
+      "enabled": "Tilføjer logning til konsollen",
+      "info": {
+        "registeredModule": "REGISTRERET MODUL",
+        "unregisteredModule": "AFMELDT MODUL"
+      },
+      "error": {
+        "messagingAlreadySet": "Du kan ikke ændre ChatExecutoren, da den allerede er sat",
+        "nullLocation": "Kan ikke måle distancen mellem en lokation og en null lokation",
+        "loadingPoi": "Der opstod en fejl under indlæsningen af POIs",
+        "loadingCells": "Der opstod en fejl under indlæsningen af celler",
+        "findingPrison": "Der opstod en fejl under forsøget på at finde din fængselsblok, store dele af systemet vil ikke fungere korrekt.",
+        "fetchingWheelData": "Der opstod en fejl under forsøget på at hente data fra det pågældende lykkehjul",
+        "unexpectedValue": "Uventet værdi: %s"
+      }
     },
     "widgets": {
       "timer": {

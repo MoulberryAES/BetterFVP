@@ -1,5 +1,6 @@
 package org.champenslabyaddons.fvplus.util;
 
+import net.labymod.api.util.I18n;
 import net.labymod.api.util.math.MathHelper;
 import java.util.Objects;
 
@@ -50,7 +51,7 @@ public class Location {
 
   public double distanceSquared(Location other) {
     if (other == null) {
-      throw new IllegalArgumentException("Cannot measure distance to a null location");
+      throw new IllegalArgumentException(I18n.translate("fvplus.logging.error.nullLocation"));
     }
     return MathHelper.square(x - other.x) + MathHelper.square(y - other.y)
         + MathHelper.square(z - other.z);

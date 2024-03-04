@@ -41,7 +41,7 @@ public class CheckRollCommand extends Command {
         throw new CompletionException(e);
       }
     }).exceptionally(ex -> {
-      Logging.getLogger().error("Could not fetch the wheel data.", ex);
+      Logging.getLogger().error(I18n.translate("fvplus.logging.error.fetchingWheelData"), ex);
       return null;
     }).thenAcceptAsync(data -> {
       if (data != null) {

@@ -19,12 +19,14 @@ public class DiscordRPCListener {
   private final ClientInfo clientInfo;
   private final DiscordSubConfiguration configuration;
   private boolean currentlyRunning;
+  private final String freakyVille;
 
   public DiscordRPCListener(ClientInfo clientInfo, LabyAPI labyAPI, DiscordSubConfiguration configuration) {
     this.clientInfo = clientInfo;
     this.labyAPI = labyAPI;
     this.configuration = configuration;
     this.currentlyRunning = false;
+    this.freakyVille = I18n.translate("fvplus.server.name");
   }
 
   private void updateRichPresence() {
@@ -41,7 +43,7 @@ public class DiscordRPCListener {
     String state = "";
 
     if (!configuration.getShowCurrentServer().get()) {
-      description = I18n.translate("fvplus.rpc.playing", "FreakyVille");
+      description = I18n.translate("fvplus.rpc.playing", freakyVille);
       acBuilder.details(description);
       acBuilder.largeAsset(getServerAsset(FreakyVilleServer.HUB));
       labyAPI.thirdPartyService().discord().displayActivity(acBuilder.build());
@@ -60,7 +62,7 @@ public class DiscordRPCListener {
         && clientInfo.getCurrentServer() != null) {
       description = I18n.translate("fvplus.rpc.playing", clientInfo.getCurrentServer().getTranslatedName());
     } else {
-      description = I18n.translate("fvplus.rpc.playing", "FreakyVille");
+      description = I18n.translate("fvplus.rpc.playing", freakyVille);
     }
     acBuilder.details(description);
     if (!state.isEmpty()) {
@@ -83,7 +85,6 @@ public class DiscordRPCListener {
   }
 
   private Asset getServerAsset(FreakyVilleServer game) {
-    String freakyVille = "Freakyville";
     return switch (game) {
       case SKY_BLOCK -> Asset.of(
           "https://imgur.com/g3KaKYM.png",

@@ -3,6 +3,7 @@ package org.champenslabyaddons.fvplus.listeners.internal;
 import net.labymod.api.event.Priority;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
+import net.labymod.api.util.I18n;
 import net.labymod.api.util.Pair;
 import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
@@ -36,8 +37,8 @@ public class PrisonNavigationListener {
         this.clientInfo.setPrison(prisonFromHeader(plainMessage));
       } catch (IllegalArgumentException e) {
         this.clientInfo.setPrison(null);
-        Logging.getLogger().error("Could not find the correct prison, most functionality will not work.", e);
-        Messaging.executor().displayClientMessage("Fandt ikke blokken, de fleste funktioner vil ikke virke.");
+        Logging.getLogger().error(I18n.translate("fvplus.logging.error.findingPrison"), e);
+        Messaging.executor().displayClientMessage(I18n.translate("fvplus.logging.error.findingPrison"));
       }
     }
   }
@@ -51,7 +52,7 @@ public class PrisonNavigationListener {
       case "C" -> Prison.C;
       case "B" -> Prison.B;
       case "A" -> Prison.A;
-      default -> throw new IllegalArgumentException("Unexpected value: " + restProduct.toUpperCase());
+      default -> throw new IllegalArgumentException(I18n.translate("fvplus.logging.error.unexpectedValue", restProduct.toUpperCase()));
     };
   }
 

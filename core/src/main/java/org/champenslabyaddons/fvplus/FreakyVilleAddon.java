@@ -6,6 +6,7 @@ import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import net.labymod.api.util.I18n;
 import org.champenslabyaddons.fvplus.commands.internal.CheckRollCommand;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.integrations.WaypointsIntegration;
@@ -49,7 +50,7 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
 
     this.registerListener(new ModuleListener(moduleService));
 
-    this.logger().info("Enabled the Addon");
+    this.logger().info(I18n.translate("fvplus.logging.enabled"));
   }
 
   @Override

@@ -22,25 +22,25 @@ public enum FreakyVilleServer {
    * @deprecated Ekspeditionen er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
   @Deprecated(forRemoval = false)
-  THE_EXPEDITION("Ekspeditionen"),
+  THE_EXPEDITION(""),
 
   /**
    * @deprecated Factions er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
   @Deprecated(forRemoval = false)
-  FACTIONS("Factions"),
+  FACTIONS(""),
 
   /**
    * @deprecated OP-Prison er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
   @Deprecated(forRemoval = false)
-  OP_PRISON("OP-Prison"),
+  OP_PRISON(""),
 
   /**
    * @deprecated Rumrejsen er ikke længere tilgængelig. Den kan blive genaktiveret i fremtiden.
    */
   @Deprecated(forRemoval = false)
-  SPACE_JOURNEY("Rumrejsen"),
+  SPACE_JOURNEY(""),
   ;
 
   private final String nameKey;

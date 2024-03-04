@@ -4,6 +4,7 @@ import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.event.EventBus;
+import net.labymod.api.util.I18n;
 import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.configuration.PrisonSubConfiguration;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
@@ -33,7 +34,7 @@ public class PoiModule extends ListenerModule {
     try {
       poiList.init();
     } catch (IOException e) {
-      Logging.getLogger().error("Caught Exception upon trying to load the POIS.", e);
+      Logging.getLogger().error(I18n.translate("fvplus.logging.error.loadingPoi"), e);
     }
     this.prisonSubConfiguration = prisonSubConfiguration;
     this.moduleListeners = moduleListenersOverview();
