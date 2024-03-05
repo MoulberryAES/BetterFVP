@@ -34,7 +34,7 @@ public class ServerNavigationListener {
 
   @Subscribe
   public void onServerDisconnect(ServerDisconnectEvent event) {
-    if (this.clientInfo.isOnFreakyVille()) {
+    if (this.clientInfo.getCurrentServer() != FreakyVilleServer.NONE) {
       this.clientInfo.setCurrentServer(FreakyVilleServer.NONE);
       this.clientInfo.setLastServer(FreakyVilleServer.NONE);
       this.clientInfo.setPrison(null);
