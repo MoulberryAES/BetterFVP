@@ -25,11 +25,16 @@ public abstract class TimerWidget extends TextHudWidget<TextHudWidgetConfig> {
   public void load(TextHudWidgetConfig config) {
     super.load(config);
     String currentTimeLeft = this.getTimeLeft();
+    boolean shouldShow = currentTimeLeft != null;
     if (currentTimeLeft == null) {
       currentTimeLeft = I18n.translate("fvplus.widgets.timer.timeLeft.unavailable");
     }
     this.textLine = super.createLine(this.getPOI(), currentTimeLeft);
-    this.textLine.setState(State.VISIBLE);
+    if (shouldShow) {
+      this.textLine.setState(State.VISIBLE);
+    } else {
+      this.textLine.setState(State.HIDDEN);
+    }
     this.setIcon(this.associatedIcon);
   }
 
