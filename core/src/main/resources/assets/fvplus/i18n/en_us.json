@@ -71,6 +71,8 @@
     "commands": {
       "checkRoll": {
         "header": "Check Roll",
+        "usage": "Brug: /checkroll <UUID>",
+        "invalidUuid": "Ugyldig UUID, skal være præcis 36 tegn lang!",
         "wheel": {
           "header": "Hjul: %s",
           "winner": "Vinder: %s",

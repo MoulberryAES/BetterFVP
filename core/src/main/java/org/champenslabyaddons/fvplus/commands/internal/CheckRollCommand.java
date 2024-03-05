@@ -27,9 +27,15 @@ public class CheckRollCommand extends Command {
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
-    if (!this.clientInfo.isOnFreakyVille()) return true;
-    if (arguments.length < 1) return true;
-    if (arguments[0].length() != 36) return true;
+    if (!this.clientInfo.isOnFreakyVille()) return false;
+    if (arguments.length < 1) {
+      displayTranslatable("fvplus.commands.checkRoll.usage", NamedTextColor.RED);
+      return true;
+    }
+    if (arguments[0].length() != 36) {
+      displayTranslatable("fvplus.commands.checkRoll.invalidUuid", NamedTextColor.RED);
+      return true;
+    }
     String uniqueId = arguments[0];
 
     CompletableFuture.supplyAsync(() -> {
