@@ -15,6 +15,7 @@ import org.champenslabyaddons.fvplus.util.Client;
 import org.champenslabyaddons.fvplus.util.Messaging;
 import org.champenslabyaddons.fvplus.util.Prison;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -44,15 +45,26 @@ public class PoiListener {
       return;
     }
     String plainMessage = event.chatMessage().getPlainText().trim();
+    Logging.getLogger().info("Plain Message: \"" + plainMessage + "\"");
     for (POI poi : this.poiList.getPois()) {
+      Logging.getLogger().info("POI: " + poi.getIdentifier());
       if (!isPoiMessage(poi, plainMessage)) {
         continue;
       }
       if (!poiAndPlayerLocationMatches(poi)) {
+        if (this.clientInfo.getPrison().isEmpty()) {
+          Logging.getLogger().info("Prison is empty");
+        } else {
+          Logging.getLogger().info("Prison: " + this.clientInfo.getPrison().get());
+        }
+        Logging.getLogger().info("POI and Player Location do not match, " +
+            "POI: " + poi.getAssosciatedServer() + " (" + Arrays.toString(
+            ((PrisonPOI) poi).getWhereCanItBeUpdated()) + ")" + " Player: "
+            + this.clientInfo.getCurrentServer());
         continue;
       }
       handle(poi, plainMessage);
-      break;
+      return;
     }
   }
 
@@ -65,11 +77,22 @@ public class PoiListener {
     }
     String demystifiedMessage = message.replace(getPlayerFromString(poi, message), "").trim();
     if (demystifiedMessage.equals(pairToString(poi.getActivationPair()))) {
+      Logging.getLogger().info("Activating...");
       activation(poi, message);
+      return;
     } else if (demystifiedMessage.equals(pairToString(poi.getConfirmationPair()))) {
+      Logging.getLogger().info("Confirming...");
       confirmation(poi, message);
+      return;
+    }
+    if (poi.getUpdateTimerMessage().isEmpty() ||
+        poi.getUpdateTimerMessage().isBlank() ||
+        poi.getUpdateTimerMessage() == null) {
+      Logging.getLogger().info("Update timer message is empty");
+      return;
     }
     if (message.startsWith(poi.getUpdateTimerMessage())) {
+      Logging.getLogger().info("Updating...");
       update(poi, message);
     }
   }
@@ -111,13 +134,18 @@ public class PoiListener {
   }
 
   private void update(POI poi, String message) {
+    Logging.getLogger().info("In Update Method");
     if (Objects.equals(poi.getUpdateTimerMessage(), "")) {
+      Logging.getLogger().info("Update timer message is empty");
       return;
     }
     if (poi.getIdentifier().toUpperCase().contains("BO")) {
+      Logging.getLogger().info("In Update Method: " + poi.getIdentifier() + " " + "Is BO!");
       return;
     }
-    boolean isGlobal = !(poi.getActivatableAtTimePersonal() != null && poi.getActivatableAtTimePersonal().isAfter(LocalDateTime.now()));
+    boolean isGlobal = !(poi.getActivatableAtTimePersonal() != null
+        && poi.getActivatableAtTimePersonal().isAfter(LocalDateTime.now()));
+    Logging.getLogger().info("Is Global: " + isGlobal);
     setTimer(poi, message, isGlobal);
   }
 
@@ -146,9 +174,11 @@ public class PoiListener {
     int minutes = readTimeFromString(message, this.minutesPattern);
     int seconds = readTimeFromString(message, this.secondsPattern);
     if (isGlobal) {
-      poi.setActivatableAtTimeAll(LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
+      poi.setActivatableAtTimeAll(
+          LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
     } else {
-      poi.setActivatableAtTimePersonal(LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
+      poi.setActivatableAtTimePersonal(
+          LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
     }
   }
 
@@ -163,6 +193,7 @@ public class PoiListener {
       player = message.substring(poi.getConfirmationPair().getFirst().length() + 1,
           message.length() - poi.getConfirmationPair().getSecond().length());
     }
+    Logging.getLogger().info("Player: " + player);
     return player;
   }
 
@@ -174,7 +205,14 @@ public class PoiListener {
     boolean isActivation =
         message.startsWith(Objects.requireNonNull(poi.getActivationPair().getFirst()))
             && message.endsWith(Objects.requireNonNull(poi.getActivationPair().getSecond()));
-    boolean isUpdate = message.startsWith(poi.getUpdateTimerMessage());
+    boolean isUpdate;
+    if (poi.getUpdateTimerMessage().isEmpty() ||
+        poi.getUpdateTimerMessage().isBlank() ||
+        poi.getUpdateTimerMessage() == null) {
+      isUpdate = false;
+    } else {
+      isUpdate = message.startsWith(poi.getUpdateTimerMessage());
+    }
     if (Objects.equals(poi.getConfirmationPair().getFirst(), "") && Objects.equals(
         poi.getConfirmationPair().getSecond(), "")) {
       return isActivation || isUpdate;

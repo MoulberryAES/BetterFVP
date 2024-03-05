@@ -41,6 +41,10 @@ public abstract class BigModule implements Module {
    */
   protected abstract ArrayList<Module> internalModulesOverview();
 
+  public final List<Module> getInternalModules() {
+    return List.copyOf(internalModules);
+  }
+
   @Override
   public abstract boolean shouldRegisterAutomatically();
 

@@ -54,7 +54,7 @@ public enum FreakyVilleServer {
   }
 
   public String getTranslatedName() {
-      return I18n.getTranslation(nameKey);
+      return I18n.translate(nameKey);
   }
 
   public TranslatableComponent getTranslatedComponent() {

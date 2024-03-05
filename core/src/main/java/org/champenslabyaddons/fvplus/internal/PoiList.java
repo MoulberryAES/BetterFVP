@@ -1,6 +1,7 @@
 package org.champenslabyaddons.fvplus.internal;
 
 import net.labymod.api.util.Pair;
+import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.poi.POI;
 import org.champenslabyaddons.fvplus.poi.PrisonPOI;
 import org.champenslabyaddons.fvplus.util.Prison;
@@ -48,6 +49,7 @@ public class PoiList implements Manager {
           Integer.parseInt(strings[10]),
           Arrays.stream(strings[11].split(";")).map(Prison::valueOf).toArray(Prison[]::new)
       ));
+      Logging.getLogger().info("POI: " + strings[0]);
     }
 
     connection.disconnect();

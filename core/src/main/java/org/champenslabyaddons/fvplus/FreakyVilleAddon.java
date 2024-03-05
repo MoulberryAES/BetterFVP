@@ -7,6 +7,7 @@ import net.labymod.api.client.chat.command.CommandService;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.labymod.api.util.I18n;
+import org.champenslabyaddons.fvplus.commands.TestPoiCommand;
 import org.champenslabyaddons.fvplus.commands.internal.CheckRollCommand;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.integrations.WaypointsIntegration;
@@ -18,7 +19,6 @@ import org.champenslabyaddons.fvplus.listeners.internal.ModuleListener;
 import org.champenslabyaddons.fvplus.module.ModuleService;
 import org.champenslabyaddons.fvplus.module.general.RPCModule;
 import org.champenslabyaddons.fvplus.module.nprison.NPrisonModule;
-import org.champenslabyaddons.fvplus.module.nprison.PoiModule;
 import org.champenslabyaddons.fvplus.util.Messaging;
 
 @AddonMain
@@ -49,6 +49,8 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     );
 
     this.registerListener(new ModuleListener(moduleService));
+
+    this.registerCommand(new TestPoiCommand());
 
     this.logger().info(I18n.translate("fvplus.logging.enabled"));
   }
