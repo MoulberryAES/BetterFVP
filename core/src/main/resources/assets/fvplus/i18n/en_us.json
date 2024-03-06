@@ -1,5 +1,6 @@
 {
   "fvplus": {
+    "prefix": "FV",
     "settings": {
       "name": "FreakyVille+",
       "enabled": {

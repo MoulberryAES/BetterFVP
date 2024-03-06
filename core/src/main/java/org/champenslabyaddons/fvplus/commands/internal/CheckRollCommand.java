@@ -21,7 +21,7 @@ public class CheckRollCommand extends Command {
   private final ClientInfo clientInfo;
 
   public CheckRollCommand(ClientInfo clientInfo) {
-    super("checkroll", "cr", "roll");
+    super("checkRoll", "cr", "roll");
     this.clientInfo = clientInfo;
   }
 
