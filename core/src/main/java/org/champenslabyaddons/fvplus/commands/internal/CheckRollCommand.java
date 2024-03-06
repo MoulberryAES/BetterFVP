@@ -65,21 +65,21 @@ public class CheckRollCommand extends Command {
     Component time = Component.text(formattedTimestamp, NamedTextColor.GRAY);
     Component id = Component.text(wheel.getId(), NamedTextColor.AQUA);
     Component wheelID = Component.translatable(rollKey + "wheel.header", NamedTextColor.GOLD, id);
-    Messaging.executor().displayClientMessage(Component.text(header, NamedTextColor.GOLD));
-    Messaging.executor().displayClientMessage(time);
-    Messaging.executor().displayClientMessage(wheelID);
+    displayMessage(Component.text(header, NamedTextColor.GOLD));
+    displayMessage(time);
+    displayMessage(wheelID);
     for (int i = 0; i < wheel.getOptions().length; i++) {
       if (wheel.getOptions().length > 10) {
         displayTranslatable(rollKey + "wheel.tooManyOptions", NamedTextColor.RED);
         break;
       }
       Component option = Component.text(" - " + wheel.getOptions()[i].getOption(), NamedTextColor.GRAY);
-      Messaging.executor().displayClientMessage(option);
+      displayMessage(option);
     }
     int winnerIndex = Integer.parseInt(wheel.getWinner());
     Component winner = Component.text(
         " - " + I18n.getTranslation(rollKey + "wheel.winner", wheel.getOptions()[winnerIndex].getOption()),
         NamedTextColor.GREEN);
-    Messaging.executor().displayClientMessage(winner);
+    displayMessage(winner);
   }
 }

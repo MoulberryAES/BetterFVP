@@ -55,27 +55,10 @@ public class PoiList implements Manager {
     connection.disconnect();
   }
 
-  public Optional<POI> getByName(String name) {
+  public Optional<POI> getByServer(String server) {
+    String serverKey = "fvplus.server." + server + ".name";
     for (POI poi : this.pois) {
-      if (poi.getDisplayName().equalsIgnoreCase(name)) {
-        return Optional.of(poi);
-      }
-    }
-    return Optional.empty();
-  }
-
-  public Optional<POI> getByActivationPair(String activationPair) {
-    for (POI poi : this.pois) {
-      if ((poi.getActivationPair().getFirst() + poi.getActivationPair().getSecond()).equals(activationPair)) {
-        return Optional.of(poi);
-      }
-    }
-    return Optional.empty();
-  }
-
-  public Optional<POI> getByConfirmationPair(String cancellationPair) {
-    for (POI poi : this.pois) {
-      if ((poi.getConfirmationPair().getFirst() + poi.getConfirmationPair().getSecond()).equals(cancellationPair)) {
+      if (poi.getAssosciatedServer().getNameKey().equalsIgnoreCase(serverKey)) {
         return Optional.of(poi);
       }
     }

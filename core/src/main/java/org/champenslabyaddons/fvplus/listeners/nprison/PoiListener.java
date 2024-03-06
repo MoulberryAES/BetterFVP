@@ -1,12 +1,10 @@
 package org.champenslabyaddons.fvplus.listeners.nprison;
 
-import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.ClientPlayer;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
 import net.labymod.api.util.Pair;
-import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.internal.PoiList;
 import org.champenslabyaddons.fvplus.poi.POI;
@@ -15,7 +13,6 @@ import org.champenslabyaddons.fvplus.util.Client;
 import org.champenslabyaddons.fvplus.util.Messaging;
 import org.champenslabyaddons.fvplus.util.Prison;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -59,9 +56,7 @@ public class PoiListener {
 
   private void handle(POI poi, String message) {
     if (!Client.poiCanBeUpdated(this.clientInfo, poi)) {
-      Messaging.executor()
-          .displayClientMessage(Component.translatable("fvplus.server.prison.poi.willNotUpdate",
-              NamedTextColor.RED));
+      Messaging.displayTranslatable("fvplus.server.prison.poi.willNotUpdate", NamedTextColor.RED);
       return;
     }
     String demystifiedMessage = message.replace(getPlayerFromString(poi, message), "").trim();

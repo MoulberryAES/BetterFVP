@@ -1,5 +1,6 @@
 package org.champenslabyaddons.fvplus.listeners.internal;
 
+import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.event.Priority;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
@@ -38,7 +39,7 @@ public class PrisonNavigationListener {
       } catch (IllegalArgumentException e) {
         this.clientInfo.setPrison(null);
         Logging.getLogger().error(I18n.translate("fvplus.logging.error.findingPrison"), e);
-        Messaging.executor().displayClientMessage(I18n.translate("fvplus.logging.error.findingPrison"));
+        Messaging.displayTranslatable("fvplus.logging.error.findingPrison", NamedTextColor.RED);
       }
     }
   }

@@ -1,11 +1,19 @@
 package org.champenslabyaddons.fvplus.commands.timers;
 
+import net.labymod.api.client.component.format.NamedTextColor;
 import org.champenslabyaddons.fvplus.commands.FreakyVillePlusCommand;
+import org.champenslabyaddons.fvplus.commands.timers.sub.TimerGlobalCommand;
+import org.champenslabyaddons.fvplus.connection.ClientInfo;
+import org.champenslabyaddons.fvplus.internal.PoiList;
 import java.util.List;
 
 public class TimerCommand extends FreakyVillePlusCommand {
-  public TimerCommand() {
-    super("timer", "timers", "tim");
+  private final ClientInfo clientInfo;
+
+  public TimerCommand(ClientInfo clientInfo, PoiList poiList) {
+    super("timer", "", "tim");
+    this.clientInfo = clientInfo;
+    this.withSubCommand(new TimerGlobalCommand(getServerAndCategoryKey(), clientInfo, poiList));
   }
 
   @Override
@@ -15,6 +23,11 @@ public class TimerCommand extends FreakyVillePlusCommand {
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
-    return false;
+    if (!this.clientInfo.isOnFreakyVille()) return false;
+    if (arguments.length < 1) {
+      displayTranslatable("usage", NamedTextColor.RED);
+      return true;
+    }
+    return true;
   }
 }
