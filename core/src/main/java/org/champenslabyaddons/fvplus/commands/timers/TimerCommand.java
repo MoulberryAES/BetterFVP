@@ -13,7 +13,7 @@ public class TimerCommand extends FreakyVillePlusCommand {
   public TimerCommand(ClientInfo clientInfo, PoiList poiList) {
     super("timer", "", "tim");
     this.clientInfo = clientInfo;
-    this.withSubCommand(new TimerGlobalCommand(getServerAndCategoryKey(), clientInfo, poiList));
+    this.withSubCommand(new TimerGlobalCommand(getServerAndCategoryKey(), this.getPrefix(), clientInfo, poiList));
   }
 
   @Override

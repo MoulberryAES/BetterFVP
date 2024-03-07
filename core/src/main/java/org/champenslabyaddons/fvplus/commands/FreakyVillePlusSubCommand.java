@@ -5,13 +5,13 @@ import org.champenslabyaddons.fvplus.util.Messaging;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class FreakyVillePlusSubCommand extends SubCommand {
-  protected FreakyVillePlusSubCommand(@NotNull String prefix, String serverAndCategoryKey, @NotNull String... aliases) {
+  protected FreakyVillePlusSubCommand(@NotNull String prefix, String parentPrefix, String serverAndCategoryKey, @NotNull String... aliases) {
     super(prefix, aliases);
     String translationKey = "fvplus.";
     if (serverAndCategoryKey != null && !serverAndCategoryKey.isEmpty()) {
       translationKey += "server." + serverAndCategoryKey + ".";
     }
-    translationKey += "commands." + prefix;
+    translationKey += "commands." + parentPrefix + "." + prefix;
     this.translationKey(translationKey);
     this.messagePrefix(Messaging.addonPrefix());
   }

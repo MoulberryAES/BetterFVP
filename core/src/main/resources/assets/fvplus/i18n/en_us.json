@@ -79,6 +79,19 @@
           "winner": "Vinder: %s",
           "tooManyOptions": "For mange navne at vise, du kan kun se vinderen"
         }
+      },
+      "timer": {
+        "usage": "Brug: /timer <global/personlig>",
+        "global": {
+          "header": "Global Timer",
+          "noOnCooldown": "Ingen timers er i cooldown",
+          "invalidServer": "Ugyldig server!"
+        },
+        "personal": {
+          "header": "Personlig Timer",
+          "noOnCooldown": "Ingen timers er i cooldown",
+          "invalidServer": "Ugyldig server!"
+        }
       }
     },
     "logging": {
