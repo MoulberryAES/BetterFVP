@@ -8,6 +8,7 @@ import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.labymod.api.util.I18n;
 import org.champenslabyaddons.fvplus.commands.internal.CheckRollCommand;
+import org.champenslabyaddons.fvplus.commands.timers.TimerCommand;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.integrations.WaypointsIntegration;
 import org.champenslabyaddons.fvplus.internal.PoiList;
@@ -18,7 +19,6 @@ import org.champenslabyaddons.fvplus.listeners.internal.ModuleListener;
 import org.champenslabyaddons.fvplus.module.ModuleService;
 import org.champenslabyaddons.fvplus.module.general.RPCModule;
 import org.champenslabyaddons.fvplus.module.nprison.NPrisonModule;
-import org.champenslabyaddons.fvplus.module.nprison.PoiModule;
 import org.champenslabyaddons.fvplus.util.Messaging;
 
 @AddonMain
@@ -28,7 +28,7 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
   protected void enable() {
     this.registerSettingCategory();
     LabyAPI labyAPI = this.labyAPI();
-    ClientInfo clientInfo = new ClientInfo(labyAPI.minecraft().getClientPlayer());
+    ClientInfo clientInfo = new ClientInfo(labyAPI.serverController(), labyAPI.minecraft().getClientPlayer());
     EventBus eventBus = labyAPI.eventBus();
     CommandService commandService = labyAPI.commandService();
     Messaging.setExecutor(labyAPI.minecraft().chatExecutor());

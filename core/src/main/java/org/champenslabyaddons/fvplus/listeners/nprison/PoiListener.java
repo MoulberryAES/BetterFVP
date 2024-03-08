@@ -1,12 +1,10 @@
 package org.champenslabyaddons.fvplus.listeners.nprison;
 
-import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.ClientPlayer;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
 import net.labymod.api.util.Pair;
-import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.internal.PoiList;
 import org.champenslabyaddons.fvplus.poi.POI;
@@ -52,22 +50,27 @@ public class PoiListener {
         continue;
       }
       handle(poi, plainMessage);
-      break;
+      return;
     }
   }
 
   private void handle(POI poi, String message) {
     if (!Client.poiCanBeUpdated(this.clientInfo, poi)) {
-      Messaging.executor()
-          .displayClientMessage(Component.translatable("fvplus.server.prison.poi.willNotUpdate",
-              NamedTextColor.RED));
+      Messaging.displayTranslatable("fvplus.server.prison.poi.willNotUpdate", NamedTextColor.RED);
       return;
     }
     String demystifiedMessage = message.replace(getPlayerFromString(poi, message), "").trim();
     if (demystifiedMessage.equals(pairToString(poi.getActivationPair()))) {
       activation(poi, message);
+      return;
     } else if (demystifiedMessage.equals(pairToString(poi.getConfirmationPair()))) {
       confirmation(poi, message);
+      return;
+    }
+    if (poi.getUpdateTimerMessage().isEmpty() ||
+        poi.getUpdateTimerMessage().isBlank() ||
+        poi.getUpdateTimerMessage() == null) {
+      return;
     }
     if (message.startsWith(poi.getUpdateTimerMessage())) {
       update(poi, message);
@@ -117,7 +120,8 @@ public class PoiListener {
     if (poi.getIdentifier().toUpperCase().contains("BO")) {
       return;
     }
-    boolean isGlobal = !(poi.getActivatableAtTimePersonal() != null && poi.getActivatableAtTimePersonal().isAfter(LocalDateTime.now()));
+    boolean isGlobal = !(poi.getActivatableAtTimePersonal() != null
+        && poi.getActivatableAtTimePersonal().isAfter(LocalDateTime.now()));
     setTimer(poi, message, isGlobal);
   }
 
@@ -146,9 +150,11 @@ public class PoiListener {
     int minutes = readTimeFromString(message, this.minutesPattern);
     int seconds = readTimeFromString(message, this.secondsPattern);
     if (isGlobal) {
-      poi.setActivatableAtTimeAll(LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
+      poi.setActivatableAtTimeAll(
+          LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
     } else {
-      poi.setActivatableAtTimePersonal(LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
+      poi.setActivatableAtTimePersonal(
+          LocalDateTime.now().plusHours(hours).plusMinutes(minutes).plusSeconds(seconds));
     }
   }
 
@@ -174,7 +180,14 @@ public class PoiListener {
     boolean isActivation =
         message.startsWith(Objects.requireNonNull(poi.getActivationPair().getFirst()))
             && message.endsWith(Objects.requireNonNull(poi.getActivationPair().getSecond()));
-    boolean isUpdate = message.startsWith(poi.getUpdateTimerMessage());
+    boolean isUpdate;
+    if (poi.getUpdateTimerMessage().isEmpty() ||
+        poi.getUpdateTimerMessage().isBlank() ||
+        poi.getUpdateTimerMessage() == null) {
+      isUpdate = false;
+    } else {
+      isUpdate = message.startsWith(poi.getUpdateTimerMessage());
+    }
     if (Objects.equals(poi.getConfirmationPair().getFirst(), "") && Objects.equals(
         poi.getConfirmationPair().getSecond(), "")) {
       return isActivation || isUpdate;

@@ -1,5 +1,6 @@
 {
   "fvplus": {
+    "prefix": "FV",
     "settings": {
       "name": "FreakyVille+",
       "enabled": {
@@ -71,10 +72,25 @@
     "commands": {
       "checkRoll": {
         "header": "Check Roll",
+        "usage": "Brug: /checkroll <UUID>",
+        "invalidUuid": "Ugyldig UUID, skal være præcis 36 tegn lang!",
         "wheel": {
           "header": "Hjul: %s",
           "winner": "Vinder: %s",
           "tooManyOptions": "For mange navne at vise, du kan kun se vinderen"
+        }
+      },
+      "timer": {
+        "usage": "Brug: /timer <global/personlig>",
+        "global": {
+          "header": "Global Timer",
+          "noPoisToShow": "Ingen timers at vise endnu",
+          "invalidServer": "Ugyldig server!"
+        },
+        "personal": {
+          "header": "Personlig Timer",
+          "noPoisToShow": "Ingen timers at vise endnu",
+          "invalidServer": "Ugyldig server!"
         }
       }
     },

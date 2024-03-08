@@ -46,7 +46,7 @@ public class ModuleService {
     String registrationMessage = I18n.translate("fvplus.logging.info.registeredModule") +  " | " + module.getClass().getTypeName();
     if (module instanceof BigModule) {
       registrationMessage += (" " + Arrays.toString(
-          ((BigModule) module).internalModulesOverview().toArray(new Module[0])));
+          ((BigModule) module).getInternalModules().toArray(new Module[0])));
     }
     logger.info(registrationMessage);
   }

@@ -1,18 +1,23 @@
 package org.champenslabyaddons.fvplus.connection;
 
 import net.labymod.api.client.entity.player.ClientPlayer;
+import net.labymod.api.client.network.server.ServerController;
+import net.labymod.api.util.logging.Logging;
 import org.champenslabyaddons.fvplus.util.FreakyVilleServer;
 import org.champenslabyaddons.fvplus.util.Prison;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ClientInfo {
+  private ServerController serverController;
   private ClientPlayer clientPlayer;
   private FreakyVilleServer currentServer;
   private FreakyVilleServer lastServer;
   private Prison prison;
   private boolean hasUpdatedToCurrentServer;
 
-  public ClientInfo(ClientPlayer clientPlayer) {
+  public ClientInfo(ServerController serverController, ClientPlayer clientPlayer) {
+    this.serverController = serverController;
     this.clientPlayer = clientPlayer;
     this.currentServer = FreakyVilleServer.NONE;
     this.lastServer = FreakyVilleServer.NONE;
@@ -21,7 +26,9 @@ public class ClientInfo {
   }
 
   public boolean isOnFreakyVille() {
-    return this.currentServer != FreakyVilleServer.NONE;
+    if (!this.serverController.isConnected()) return false;
+    return isValidServerAddress(
+        Objects.requireNonNull(this.serverController.getCurrentServerData()).address().getHost());
   }
 
   public Optional<ClientPlayer> getClientPlayer() {
@@ -62,5 +69,10 @@ public class ClientInfo {
 
   public void setHasUpdatedToCurrentServer(boolean hasUpdatedToCurrentServer) {
     this.hasUpdatedToCurrentServer = hasUpdatedToCurrentServer;
+  }
+
+  private boolean isValidServerAddress(String address) {
+    address = address.toLowerCase();
+    return address.endsWith(".freakyville.dk") || address.endsWith(".freakyville.net");
   }
 }
