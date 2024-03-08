@@ -3,6 +3,7 @@ package org.champenslabyaddons.fvplus.commands.timers;
 import net.labymod.api.client.component.format.NamedTextColor;
 import org.champenslabyaddons.fvplus.commands.FreakyVillePlusCommand;
 import org.champenslabyaddons.fvplus.commands.timers.sub.TimerGlobalCommand;
+import org.champenslabyaddons.fvplus.commands.timers.sub.TimerPersonalCommand;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.internal.PoiList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class TimerCommand extends FreakyVillePlusCommand {
     super("timer", "", "tim");
     this.clientInfo = clientInfo;
     this.withSubCommand(new TimerGlobalCommand(getServerAndCategoryKey(), this.getPrefix(), clientInfo, poiList));
+    this.withSubCommand(new TimerPersonalCommand(getServerAndCategoryKey(), this.getPrefix(), clientInfo, poiList));
   }
 
   @Override

@@ -50,8 +50,6 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
 
     this.registerListener(new ModuleListener(moduleService));
 
-    this.registerCommand(new TimerCommand(clientInfo, poiList));
-
     this.logger().info(I18n.translate("fvplus.logging.enabled"));
   }
 

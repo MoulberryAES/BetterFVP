@@ -23,7 +23,7 @@ public abstract class CommandModule implements Module {
   }
 
   @Override
-  public final void register() {
+  public void register() {
     for (Command command : this.moduleCommands) {
       this.commandService.register(command);
     }
@@ -31,7 +31,7 @@ public abstract class CommandModule implements Module {
   }
 
   @Override
-  public final void unregister() {
+  public void unregister() {
     for (Command command : this.moduleCommands) {
       this.commandService.unregister(command);
     }

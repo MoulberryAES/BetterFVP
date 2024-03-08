@@ -27,26 +27,15 @@ public class TimerPersonalCommand extends TimerSubCommand {
       }
       poisOnCooldown.add(poi);
     }
-    if (arguments.length < 1) {
-      defaultExecution(poisOnCooldown);
-      return true;
-    }
-    FreakyVilleServer specifiedServer;
-    try {
-      specifiedServer = getServerFromString(arguments[0]);
-    } catch (IllegalArgumentException e) {
-      displayTranslatable("invalidServer", NamedTextColor.RED);
-      return true;
-    }
-    serverSpecificExecution(poisOnCooldown, specifiedServer);
+    return howToExecute(arguments, poisOnCooldown);
   }
 
   @Override
   protected final void displayPOI(POI poi) {
     Component line = Component.text(" - ", NamedTextColor.GRAY);
     Component poiName = Component.text(poi.getDisplayName(), NamedTextColor.YELLOW);
-    Component seperator = Component.text(": ", NamedTextColor.GRAY);
+    Component separator = Component.text(": ", NamedTextColor.GRAY);
     Component timeLeft = Component.text(poi.getPersonalTimeLeft(), NamedTextColor.WHITE);
-    displayMessage(line.append(poiName).append(seperator).append(timeLeft));
+    displayMessage(line.append(poiName).append(separator).append(timeLeft));
   }
 }

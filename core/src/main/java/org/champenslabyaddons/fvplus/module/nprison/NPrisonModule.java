@@ -36,7 +36,7 @@ public class NPrisonModule extends BigModule {
   protected ArrayList<Module> internalModulesOverview() {
     ArrayList<Module> modules = new ArrayList<>();
     modules.add(new CellModule(commandService, eventBus, clientInfo, prisonSubConfiguration));
-    modules.add(new PoiModule(eventBus, clientInfo, labyAPI().hudWidgetRegistry(), poiList, prisonSubConfiguration));
+    modules.add(new PoiModule(commandService, eventBus, clientInfo, labyAPI().hudWidgetRegistry(), poiList, prisonSubConfiguration));
     return modules;
   }
 

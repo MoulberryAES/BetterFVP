@@ -25,8 +25,24 @@ public abstract class TimerSubCommand extends FreakyVillePlusSubCommand {
 
   public abstract boolean execute(String prefix, String[] arguments);
 
+  protected boolean howToExecute(String[] arguments, List<POI> poisOnCooldown) {
+    if (arguments.length < 1) {
+      defaultExecution(poisOnCooldown);
+      return true;
+    }
+    FreakyVilleServer specifiedServer;
+    try {
+      specifiedServer = getServerFromString(arguments[0]);
+    } catch (IllegalArgumentException e) {
+      displayTranslatable("invalidServer", NamedTextColor.RED);
+      return true;
+    }
+    serverSpecificExecution(poisOnCooldown, specifiedServer);
+    return true;
+  }
+
   protected void defaultExecution(List<POI> poisOnCooldown) {
-    String header = " -= [ " + I18n.translate(getTranslationKey() + ".header") + " ] =-";
+    String header = " -= [ " + I18n.translate(getTranslationKey("header")) + " ] =-";
     displayMessage(Component.text(header, NamedTextColor.GOLD));
     if (poisOnCooldown.isEmpty()) {
       displayTranslatable("noOnCooldown", NamedTextColor.GREEN);
@@ -44,7 +60,7 @@ public abstract class TimerSubCommand extends FreakyVillePlusSubCommand {
         poisOnSpecifiedServerOnCooldown.add(poi);
       }
     }
-    String headerVal = I18n.translate(getTranslationKey() + ".header");
+    String headerVal = I18n.translate(getTranslationKey("header"));
     String header = String.format(" -= [ %s - %s ] =-", headerVal, specifiedServer.getTranslatedName());
     displayMessage(Component.text(header, NamedTextColor.GOLD));
     if (poisOnSpecifiedServerOnCooldown.isEmpty()) {
