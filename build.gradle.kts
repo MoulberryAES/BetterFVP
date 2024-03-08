@@ -17,7 +17,7 @@ labyMod {
         author = "Champen_V1ldtand"
         description = "A collection of QOL changes for FreakyVille"
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.0.1")
+        version = System.getenv().getOrDefault("VERSION", "1.1.1")
     }
 
     minecraft {
