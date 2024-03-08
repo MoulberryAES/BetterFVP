@@ -5,7 +5,6 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.internal.PoiList;
 import org.champenslabyaddons.fvplus.poi.POI;
-import org.champenslabyaddons.fvplus.util.FreakyVilleServer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +16,14 @@ public class TimerPersonalCommand extends TimerSubCommand {
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (!clientInfo.isOnFreakyVille()) return false;
-    List<POI> poisOnCooldown = new ArrayList<>();
+    List<POI> poisToShow = new ArrayList<>();
     for (POI poi : poiList.getPois()) {
       if (poi.getPersonalTimeLeft() == null) {
         continue;
       }
-      if (poi.getPersonalTimeLeft().equals(isTakeable)) {
-        continue;
-      }
-      poisOnCooldown.add(poi);
+      poisToShow.add(poi);
     }
-    return howToExecute(arguments, poisOnCooldown);
+    return howToExecute(arguments, poisToShow);
   }
 
   @Override

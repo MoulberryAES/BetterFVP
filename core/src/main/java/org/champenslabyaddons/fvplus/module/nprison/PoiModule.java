@@ -41,6 +41,7 @@ public class PoiModule extends CombinedModule {
       Logging.getLogger().error(I18n.translate("fvplus.logging.error.loadingPoi"), e);
     }
     this.prisonSubConfiguration = prisonSubConfiguration;
+    this.moduleCommands = moduleCommandsOverview();
     this.moduleListeners = moduleListenersOverview();
     this.poiTimerWidgets = modulePoiWidgets();
   }

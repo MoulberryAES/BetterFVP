@@ -12,32 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimerGlobalCommand extends TimerSubCommand {
-  private final String cantCheckForSure;
   private final String unavailable;
 
   public TimerGlobalCommand(String serverAndCategoryKey, String parentPrefix, ClientInfo clientInfo, PoiList poiList) {
     super("global", serverAndCategoryKey,  parentPrefix, clientInfo, poiList, "globale", "g");
-    this.cantCheckForSure = " (" + I18n.translate("fvplus.widgets.timer.timeLeft.cantKnowForSure") + ")";
     this.unavailable = I18n.translate("fvplus.widgets.timer.timeLeft.unavailable");
   }
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (!clientInfo.isOnFreakyVille()) return false;
-    List<POI> poisOnCooldown = new ArrayList<>();
+    List<POI> poisToShow = new ArrayList<>();
     for (POI poi : poiList.getPois()) {
       if (poi.getTimeLeft(clientInfo) == null) {
-        continue;
-      }
-      if (poi.getTimeLeft(clientInfo).equals(isTakeable.replace(cantCheckForSure, ""))) {
         continue;
       }
       if (poi.getTimeLeft(clientInfo).equals(unavailable)) {
         continue;
       }
-      poisOnCooldown.add(poi);
+      poisToShow.add(poi);
     }
-    return howToExecute(arguments, poisOnCooldown);
+    return howToExecute(arguments, poisToShow);
   }
 
   @Override

@@ -84,12 +84,12 @@
         "usage": "Brug: /timer <global/personlig>",
         "global": {
           "header": "Global Timer",
-          "noOnCooldown": "Ingen timers er i cooldown",
+          "noPoisToShow": "Ingen timers at vise endnu",
           "invalidServer": "Ugyldig server!"
         },
         "personal": {
           "header": "Personlig Timer",
-          "noOnCooldown": "Ingen timers er i cooldown",
+          "noPoisToShow": "Ingen timers at vise endnu",
           "invalidServer": "Ugyldig server!"
         }
       }

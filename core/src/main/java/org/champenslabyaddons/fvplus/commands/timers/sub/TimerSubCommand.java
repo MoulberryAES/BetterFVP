@@ -14,13 +14,11 @@ import java.util.List;
 public abstract class TimerSubCommand extends FreakyVillePlusSubCommand {
   protected final ClientInfo clientInfo;
   protected final PoiList poiList;
-  protected final String isTakeable;
 
   public TimerSubCommand(String prefix, String serverAndCategoryKey, String parentPrefix, ClientInfo clientInfo, PoiList poiList, String... aliases) {
     super(prefix, parentPrefix, serverAndCategoryKey, aliases);
     this.clientInfo = clientInfo;
     this.poiList = poiList;
-    this.isTakeable = I18n.translate("fvplus.widgets.timer.timeLeft.isTakeable");
   }
 
   public abstract boolean execute(String prefix, String[] arguments);
@@ -41,33 +39,33 @@ public abstract class TimerSubCommand extends FreakyVillePlusSubCommand {
     return true;
   }
 
-  protected void defaultExecution(List<POI> poisOnCooldown) {
+  protected void defaultExecution(List<POI> poisToShow) {
     String header = " -= [ " + I18n.translate(getTranslationKey("header")) + " ] =-";
     displayMessage(Component.text(header, NamedTextColor.GOLD));
-    if (poisOnCooldown.isEmpty()) {
-      displayTranslatable("noOnCooldown", NamedTextColor.GREEN);
+    if (poisToShow.isEmpty()) {
+      displayTranslatable("noPoisToShow", NamedTextColor.GREEN);
       return;
     }
-    for (POI poi : poisOnCooldown) {
+    for (POI poi : poisToShow) {
       displayPOI(poi);
     }
   }
 
-  protected void serverSpecificExecution(List<POI> poisOnCooldown, FreakyVilleServer specifiedServer) {
-    List<POI> poisOnSpecifiedServerOnCooldown = new ArrayList<>();
-    for (POI poi : poisOnCooldown) {
+  protected void serverSpecificExecution(List<POI> poisToShow, FreakyVilleServer specifiedServer) {
+    List<POI> poisOnSpecifiedServerToShow = new ArrayList<>();
+    for (POI poi : poisToShow) {
       if (poi.getAssosciatedServer() == specifiedServer) {
-        poisOnSpecifiedServerOnCooldown.add(poi);
+        poisOnSpecifiedServerToShow.add(poi);
       }
     }
     String headerVal = I18n.translate(getTranslationKey("header"));
     String header = String.format(" -= [ %s - %s ] =-", headerVal, specifiedServer.getTranslatedName());
     displayMessage(Component.text(header, NamedTextColor.GOLD));
-    if (poisOnSpecifiedServerOnCooldown.isEmpty()) {
-      displayTranslatable("noOnCooldown", NamedTextColor.GREEN);
+    if (poisOnSpecifiedServerToShow.isEmpty()) {
+      displayTranslatable("noPoisToShow", NamedTextColor.GREEN);
       return;
     }
-    for (POI poi : poisOnSpecifiedServerOnCooldown) {
+    for (POI poi : poisOnSpecifiedServerToShow) {
       displayPOI(poi);
     }
   }
