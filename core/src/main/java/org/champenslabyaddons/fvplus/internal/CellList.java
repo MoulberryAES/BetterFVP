@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class CellList implements Manager {
   public void init() throws IOException {
     HttpURLConnection connection = HttpConnector.getOpenHttpConnection(new URL(
         Resources.CELL_LIST_URL));
-    Csv csv = new Csv(new BufferedReader(new InputStreamReader(connection.getInputStream())));
+    Csv csv = new Csv(new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8)));
 
     for (String[] strings : csv.readALl()) {
       this.cellBlocks.add(new CellBlock(
