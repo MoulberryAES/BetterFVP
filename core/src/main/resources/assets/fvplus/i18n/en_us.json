@@ -70,6 +70,28 @@
       "lastSeen": "Sidst set på %s"
     },
     "commands": {
+      "freakyHelp": {
+        "header": "Hjælpe oversigt",
+        "commands": {
+          "waypoint": {
+            "description": "%s | Opret et midlertidigt waypoint til den angivne celle",
+            "usage": "Brug: /ce waypoint <cellenavn>"
+          },
+          "checkRoll": {
+            "description": "%s | Vis vinderen af et lykkehjul",
+            "usage": "Brug: /checkroll <UUID>"
+          },
+          "timer": {
+            "description": "%s | Vis en liste over timers",
+            "usage": "Brug: /timer <global/personlig>"
+          },
+          "freakyHelp": {
+            "description": "%s | Vis denne hjælpe oversigt",
+            "usage": "Brug: /fhelp <command>"
+          }
+        },
+        "noCommand": "Ingen kommando fundet"
+      },
       "checkRoll": {
         "header": "Check Roll",
         "usage": "Brug: /checkroll <UUID>",

@@ -8,6 +8,7 @@ import net.labymod.api.event.EventBus;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.labymod.api.util.I18n;
 import org.champenslabyaddons.fvplus.commands.internal.CheckRollCommand;
+import org.champenslabyaddons.fvplus.commands.internal.FreakyvillePlusHelpCommand;
 import org.champenslabyaddons.fvplus.commands.timers.TimerCommand;
 import org.champenslabyaddons.fvplus.connection.ClientInfo;
 import org.champenslabyaddons.fvplus.integrations.WaypointsIntegration;
@@ -41,6 +42,7 @@ public class FreakyVilleAddon extends LabyAddon<FreakyVillePlusConfiguration> {
     this.registerListener(new PrisonNavigationListener(clientInfo));
 
     this.registerCommand(new CheckRollCommand(clientInfo));
+    this.registerCommand(new FreakyvillePlusHelpCommand());
 
     ModuleService moduleService = new ModuleService(this.logger());
     moduleService.registerModules(
