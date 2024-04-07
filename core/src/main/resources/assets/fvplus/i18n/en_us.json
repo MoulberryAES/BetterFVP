@@ -26,6 +26,18 @@
         "showCurrentServer": {
           "name": "Vis hvilken server du er på, (f.eks. KitPvP)"
         }
+      },
+      "sessionSubSettings": {
+        "name": "Sessioner",
+        "enabled": {
+          "name": "Slået til"
+        },
+        "includeStatsFromPrison": {
+          "name": "Inkluder statistik fra NPrison"
+        },
+        "saveToFileSystem": {
+          "name": "Gem stats til filsystemet"
+        }
       }
     },
     "server": {
