@@ -7,6 +7,7 @@ import net.labymod.api.configuration.loader.annotation.SpriteTexture;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import org.champenslabyaddons.fvplus.configuration.DiscordSubConfiguration;
 import org.champenslabyaddons.fvplus.configuration.PrisonSubConfiguration;
+import org.champenslabyaddons.fvplus.configuration.SessionSubConfiguration;
 
 @ConfigName("settings")
 @SpriteTexture("settings/icons.png")
@@ -19,6 +20,8 @@ public class FreakyVillePlusConfiguration extends AddonConfig {
 
   private final DiscordSubConfiguration discordSubSettings = new DiscordSubConfiguration();
 
+  private final SessionSubConfiguration sessionSubSettings = new SessionSubConfiguration();
+
   @Override
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
@@ -30,5 +33,9 @@ public class FreakyVillePlusConfiguration extends AddonConfig {
 
   public DiscordSubConfiguration getDiscordSubSettings() {
     return this.discordSubSettings;
+  }
+
+  public SessionSubConfiguration getSessionSubSettings() {
+    return this.sessionSubSettings;
   }
 }
