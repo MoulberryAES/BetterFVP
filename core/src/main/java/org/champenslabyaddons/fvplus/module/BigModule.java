@@ -1,13 +1,13 @@
 package org.champenslabyaddons.fvplus.module;
 
+import org.champenslabyaddons.fvplus.util.FreakyVilleServer;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * En superklasse for alle moduler der har en intention om at have en masse undermoduler.
  * <p>
- * Dette kan være en god idé hvis man har en masse moduler der kun relatere sig til en {@link org.champenslabyaddons.fvplus.util.FreakyVilleServer}.
- * <p>
+ * Dette kan være en god idé hvis man har en masse moduler der kun relatere sig til en {@link FreakyVilleServer}.
  * @since 1.0.0
  */
 public abstract class BigModule implements Module {
