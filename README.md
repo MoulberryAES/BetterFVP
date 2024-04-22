@@ -6,4 +6,4 @@ Et Open-Source forge mod, der er til for at forbedre spiloplevelsen på FreakyVi
 
 Download mod og åben via forge (1.8.9).  
 Klik 'Remap til LabyMod/Lunar Client'.  
-Åben LabyMod/Lunar Client og sæt indstillinger efter behov.  
+Åben **derefter** LabyMod/Lunar Client og sæt indstillinger efter behov.  
